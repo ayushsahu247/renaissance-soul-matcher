@@ -2,39 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Renaissance Design System - Rich colors inspired by Italian Renaissance */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Renaissance Color Palette */
+    --background: 45 15% 97%;
+    --foreground: 25 20% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 45 25% 95%;
+    --card-foreground: 25 20% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 45 25% 95%;
+    --popover-foreground: 25 20% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Deep Burgundy Primary */
+    --primary: 355 45% 32%;
+    --primary-foreground: 45 25% 95%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Warm Gold Secondary */
+    --secondary: 45 55% 75%;
+    --secondary-foreground: 25 20% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Rich Brown Muted */
+    --muted: 30 20% 85%;
+    --muted-foreground: 30 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Golden Accent */
+    --accent: 45 70% 65%;
+    --accent-foreground: 25 20% 15%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 45 25% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 30 20% 85%;
+    --input: 30 20% 85%;
+    --ring: 355 45% 32%;
+
+    /* Custom Renaissance Tokens */
+    --renaissance-burgundy: 355 45% 32%;
+    --renaissance-gold: 45 70% 65%;
+    --renaissance-brown: 30 25% 25%;
+    --renaissance-cream: 45 25% 95%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(355 45% 32%), hsl(355 40% 40%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 70% 65%), hsl(45 60% 55%));
+    --gradient-elegant: linear-gradient(180deg, hsl(45 15% 97%), hsl(45 25% 95%));
+    
+    /* Shadows */
+    --shadow-renaissance: 0 10px 30px -10px hsl(355 45% 32% / 0.2);
+    --shadow-gold-glow: 0 0 20px hsl(45 70% 65% / 0.3);
 
     --radius: 0.5rem;
 

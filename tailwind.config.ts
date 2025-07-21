@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'playfair': ['Playfair Display', 'serif'],
+				'crimson': ['Crimson Text', 'serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,7 +65,22 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				'renaissance': {
+					burgundy: 'hsl(var(--renaissance-burgundy))',
+					gold: 'hsl(var(--renaissance-gold))',
+					brown: 'hsl(var(--renaissance-brown))',
+					cream: 'hsl(var(--renaissance-cream))',
 				}
+			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-gold': 'var(--gradient-gold)',
+				'gradient-elegant': 'var(--gradient-elegant)',
+			},
+			boxShadow: {
+				'renaissance': 'var(--shadow-renaissance)',
+				'gold-glow': 'var(--shadow-gold-glow)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
