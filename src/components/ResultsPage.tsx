@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Crown, Share2, RotateCcw, Heart, Palette, Users, Trophy } from "lucide-react";
 import lorenzoPortrait from "@/assets/lorenzo-portrait.jpg";
 import { useToast } from "@/hooks/use-toast";
+import { getCharacterImage, WikipediaImageData } from "@/services/wikipediaService";
 
 interface AnalysisResult {
   character: string;
@@ -23,6 +24,8 @@ interface ResultsPageProps {
 
 export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => {
   const { toast } = useToast();
+  const [characterImage, setCharacterImage] = useState<WikipediaImageData | null>(null);
+  const [imageLoading, setImageLoading] = useState(true);
   
   // Fallback to default if no analysis result
   const result = analysisResult || {
@@ -42,6 +45,24 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
       { title: "Cultural", description: "Appreciation for arts and learning" }
     ]
   };
+
+  // Fetch character image when component mounts or character changes
+  useEffect(() => {
+    const fetchImage = async () => {
+      setImageLoading(true);
+      try {
+        const imageData = await getCharacterImage(result.character);
+        setCharacterImage(imageData);
+      } catch (error) {
+        console.error("Error fetching character image:", error);
+        setCharacterImage(null);
+      } finally {
+        setImageLoading(false);
+      }
+    };
+
+    fetchImage();
+  }, [result.character]);
 
   const handleShare = async () => {
     const shareText = `I just discovered my Renaissance spirit! I'm a ${result.matchPercentage}% match with ${result.character} - ${result.description} Take the assessment: ${window.location.origin}`;
@@ -129,11 +150,28 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
           <Card className="shadow-renaissance border-0">
             <CardContent className="p-6">
               <div className="text-center mb-6">
-                <img 
-                  src={lorenzoPortrait}
-                  alt={`${result.character} portrait`}
-                  className="w-48 h-48 mx-auto rounded-lg shadow-renaissance object-cover mb-4"
-                />
+                {imageLoading ? (
+                  <div className="w-48 h-48 mx-auto rounded-lg shadow-renaissance bg-muted animate-pulse mb-4 flex items-center justify-center">
+                    <span className="text-sm text-muted-foreground">Loading...</span>
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <img 
+                      src={characterImage?.imageUrl || lorenzoPortrait}
+                      alt={characterImage?.description || `Portrait of ${result.character}`}
+                      className="w-48 h-48 mx-auto rounded-lg shadow-renaissance object-cover mb-4"
+                      onError={(e) => {
+                        // Fallback to default image if Wikipedia image fails to load
+                        (e.target as HTMLImageElement).src = lorenzoPortrait;
+                      }}
+                    />
+                    {characterImage?.attribution && (
+                      <p className="text-xs text-muted-foreground mt-2">
+                        {characterImage.attribution}
+                      </p>
+                    )}
+                  </div>
+                )}
                 <div className="flex items-center justify-center mb-2">
                   <Crown className="h-5 w-5 text-renaissance-gold mr-2" />
                   <span className="font-playfair text-lg font-semibold">1449 - 1492</span>
