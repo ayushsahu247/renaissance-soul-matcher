@@ -10,6 +10,8 @@ interface AnalysisResult {
   character: string;
   matchPercentage: number;
   description: string;
+  shortDescription: string;
+  biography: string;
   achievements: string[];
   traits: Array<{ title: string; description: string }>;
 }
@@ -27,6 +29,8 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
     character: "Lorenzo de' Medici",
     matchPercentage: 88,
     description: "A natural leader with vision and diplomatic skills.",
+    shortDescription: "Florentine Statesman and Art Patron",
+    biography: "Lorenzo de' Medici earned the title 'The Magnificent' not through conquest or wealth alone, but through his extraordinary ability to recognize and nurture human potential. As the de facto ruler of Florence during the High Renaissance, he transformed his city into the cultural beacon of Europe. What set Lorenzo apart was his understanding that true power comes from empowering others. He discovered Michelangelo as a young artist and provided him with both resources and creative freedom. He supported Botticelli, Poliziano, and countless other artists who would define the Renaissance spirit. Lorenzo was a master diplomat who preferred negotiation to warfare, seeing conflict as an opportunity for creative problem-solving. He believed that festivals, art, and celebration were not luxuries but necessities for a thriving society. His approach to leadership was fundamentally humanistic - he governed through inspiration rather than intimidation.",
     achievements: [
       "Patron of Renaissance arts and culture",
       "Skilled diplomat and political strategist",
@@ -72,6 +76,26 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
     { icon: Trophy, title: "Legacy Builder", description: "Values long-term impact over short-term gains" }
   ];
 
+  // Function to split biography into paragraphs
+  const formatBiography = (bio: string) => {
+    // Split by sentence-ending periods followed by space and capital letter
+    // This is a simple approach - you might want to enhance this based on your needs
+    const sentences = bio.split(/\.(?=\s[A-Z])/);
+    const paragraphs = [];
+    
+    // Group sentences into paragraphs (roughly 2-3 sentences per paragraph)
+    for (let i = 0; i < sentences.length; i += 2) {
+      const paragraph = sentences.slice(i, i + 2).join('.').trim();
+      if (paragraph && !paragraph.endsWith('.')) {
+        paragraphs.push(paragraph + '.');
+      } else {
+        paragraphs.push(paragraph);
+      }
+    }
+    
+    return paragraphs.filter(p => p.length > 0);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-elegant px-4 py-8">
       <div className="max-w-4xl mx-auto">
@@ -84,7 +108,7 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
             {result.character}
           </h1>
           <p className="text-xl font-playfair italic text-muted-foreground">
-            Historical Renaissance Figure
+            {result.shortDescription}
           </p>
         </div>
 
@@ -162,31 +186,16 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
           </Card>
         </div>
 
-        {/* Biography */}
+        {/* Dynamic Biography */}
         <Card className="shadow-renaissance border-0 mb-8">
           <CardContent className="p-6">
             <h3 className="font-playfair font-semibold text-xl mb-4 text-center">
-              The Character of Lorenzo "The Magnificent"
+              The Character of {result.character}
             </h3>
             <div className="font-crimson text-foreground/80 leading-relaxed space-y-4">
-              <p>
-                Lorenzo de' Medici earned the title "The Magnificent" not through conquest or wealth alone, 
-                but through his extraordinary ability to recognize and nurture human potential. As the de facto 
-                ruler of Florence during the High Renaissance, he transformed his city into the cultural 
-                beacon of Europe.
-              </p>
-              <p>
-                What set Lorenzo apart was his understanding that true power comes from empowering others. 
-                He discovered Michelangelo as a young artist and provided him with both resources and creative 
-                freedom. He supported Botticelli, Poliziano, and countless other artists who would define the 
-                Renaissance spirit.
-              </p>
-              <p>
-                Lorenzo was a master diplomat who preferred negotiation to warfare, seeing conflict as an 
-                opportunity for creative problem-solving. He believed that festivals, art, and celebration 
-                were not luxuries but necessities for a thriving society. His approach to leadership was 
-                fundamentally humanistic - he governed through inspiration rather than intimidation.
-              </p>
+              {formatBiography(result.biography).map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
           </CardContent>
         </Card>
