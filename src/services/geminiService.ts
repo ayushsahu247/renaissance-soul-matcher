@@ -29,28 +29,40 @@ export async function generateNextQuestion(
 
 ${context}
 
-Generate question ${questionNumber} of 7 for this personality assessment as well as identifying passions, inclinations, and morality. The question should:
-- Get them to reveal their inner thoughts, subtly through cases
-- Be case based "what would you do in this situation" types, which draw out their feelings.
-- Be less than 50 words.
-- Build upon previous responses to dig deeper into personality traits, passions, inclinations, morality
-- Be different from the last one. Do not make every question about money, or about lost children... have variety.
-- Ask questions that gauge individuality vs society-oriented thinking.
-- Judge discipline, focus, weaknesses.
-- Be designed to reveal character traits that could match historical figures
-- Cannot ask which history character they relate to.
-- Be open-ended to allow detailed responses
-- Include a brief title (2-4 words) and the main question
-- MUST NOT GET REPETITIVE
-- Pull from a variety of moral choices
-- Get people to reveal their thoughts, opinions on extreme situations, tough questions, tradeoffs.
+You are conducting a comprehensive personality assessment to match someone with a historical figure. 
 
-Format your response as JSON:
+${context}
+
+Generate question ${questionNumber} of 7. Each question MUST explore different aspects of personality. Use this variety framework:
+
+QUESTION THEMES TO ROTATE THROUGH:
+- Moral dilemmas & ethical choices
+- Leadership under pressure situations  
+- Risk vs security tradeoffs
+- Individual vs collective good decisions
+- Power and responsibility scenarios
+- Innovation vs tradition conflicts
+- Justice vs mercy situations
+
+Generate a situational question that:
+- Presents a realistic dilemma requiring a tough choice
+- Reveals core values, decision-making style, and moral compass
+- Is under 50 words
+- Differs completely from previous questions - NO REPETITION
+- Tests whether they prioritize: individual vs society, emotion vs logic, tradition vs change
+- Exposes their relationship with power, risk, and moral compromise
+- Builds on previous responses to dig deeper into personality patterns
+
+AVOID: Money questions if already asked, repetitive scenarios, obvious "right" answers
+
+Format as JSON:
 {
   "title": "Brief Title",
-  "question": "Your detailed question here?",
-  "placeholder": "Suggested response starter..."
+  "question": "You discover/face/witness [specific scenario]. What do you do and why?",
+  "placeholder": "I would..."
 }
+
+Focus on revealing: leadership style, moral framework, risk tolerance, individualism vs collectivism, discipline, and core motivations. Make each question completely unique.
 
 Only return the JSON, no other text.`;
 
