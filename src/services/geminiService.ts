@@ -40,6 +40,9 @@ Generate question ${questionNumber} of 7 for this personality assessment as well
 - Cannot ask which history character they relate to.
 - Be open-ended to allow detailed responses
 - Include a brief title (2-4 words) and the main question
+- MUST NOT GET REPETITIVE
+- Pull from a variety of moral choices
+- Get people to reveal their thoughts, opinions on extreme situations, tough questions, tradeoffs.
 
 Format your response as JSON:
 {
