@@ -13,6 +13,9 @@ interface AnalysisResult {
   description: string;
   shortDescription: string;
   biography: string;
+  birthYear: number;
+  deathYear: number;
+  location: string;
   achievements: string[];
   traits: Array<{ title: string; description: string }>;
 }
@@ -34,6 +37,9 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
     description: "A natural leader with vision and diplomatic skills.",
     shortDescription: "Florentine Statesman and Art Patron",
     biography: "Lorenzo de' Medici earned the title 'The Magnificent' not through conquest or wealth alone, but through his extraordinary ability to recognize and nurture human potential. As the de facto ruler of Florence during the High Renaissance, he transformed his city into the cultural beacon of Europe. What set Lorenzo apart was his understanding that true power comes from empowering others. He discovered Michelangelo as a young artist and provided him with both resources and creative freedom. He supported Botticelli, Poliziano, and countless other artists who would define the Renaissance spirit. Lorenzo was a master diplomat who preferred negotiation to warfare, seeing conflict as an opportunity for creative problem-solving. He believed that festivals, art, and celebration were not luxuries but necessities for a thriving society. His approach to leadership was fundamentally humanistic - he governed through inspiration rather than intimidation.",
+    birthYear: 1449,
+    deathYear: 1492,
+    location: "Florence, Italy",
     achievements: [
       "Patron of Renaissance arts and culture",
       "Skilled diplomat and political strategist",
@@ -174,9 +180,11 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
                 )}
                 <div className="flex items-center justify-center mb-2">
                   <Crown className="h-5 w-5 text-renaissance-gold mr-2" />
-                  <span className="font-playfair text-lg font-semibold">1449 - 1492</span>
+                  <span className="font-playfair text-lg font-semibold">
+                    {result.birthYear} - {result.deathYear}
+                  </span>
                 </div>
-                <p className="font-crimson text-muted-foreground">Florence, Italy</p>
+                <p className="font-crimson text-muted-foreground">{result.location}</p>
               </div>
               
               <div className="space-y-3">

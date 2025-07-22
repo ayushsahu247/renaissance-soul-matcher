@@ -99,6 +99,9 @@ export async function generatePersonalityAnalysis(responses: string[]): Promise<
   description: string;
   shortDescription: string;
   biography: string;
+  birthYear: number;
+  deathYear: number;
+  location: string;
   achievements: string[];
   traits: Array<{ title: string; description: string }>;
 }> {
@@ -114,6 +117,9 @@ Analyze the responses and match to the most suitable historical figure. Provide 
   "description": "2-3 sentence description of why they match this figure",
   "shortDescription": "3-7 word concise description of the character's role/identity (e.g., 'Florentine Statesman and Art Patron')",
   "biography": "3-4 paragraph biography about this historical figure, focusing on their character, leadership style, and what made them unique",
+  "birthYear": 1449,
+  "deathYear": 1492,
+  "location": "City, Country (e.g., 'Florence, Italy')",
   "achievements": ["3-4 key achievements of the historical figure"],
   "traits": [
     {"title": "Trait Name", "description": "How this trait manifests in both the person and historical figure"},
@@ -172,6 +178,9 @@ Only return the JSON, no other text.`;
       description: "A natural leader with vision and diplomatic skills.",
       shortDescription: "Florentine Statesman and Art Patron",
       biography: "Lorenzo de' Medici earned the title 'The Magnificent' not through conquest or wealth alone, but through his extraordinary ability to recognize and nurture human potential. As the de facto ruler of Florence during the High Renaissance, he transformed his city into the cultural beacon of Europe. What set Lorenzo apart was his understanding that true power comes from empowering others. He discovered Michelangelo as a young artist and provided him with both resources and creative freedom. He supported Botticelli, Poliziano, and countless other artists who would define the Renaissance spirit. Lorenzo was a master diplomat who preferred negotiation to warfare, seeing conflict as an opportunity for creative problem-solving. He believed that festivals, art, and celebration were not luxuries but necessities for a thriving society. His approach to leadership was fundamentally humanistic - he governed through inspiration rather than intimidation.",
+      birthYear: 1449,
+      deathYear: 1492,
+      location: "Florence, Italy",
       achievements: [
         "Patron of Renaissance arts and culture",
         "Skilled diplomat and political strategist",
