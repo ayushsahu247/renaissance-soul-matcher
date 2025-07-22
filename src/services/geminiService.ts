@@ -30,6 +30,7 @@ export async function generateNextQuestion(
 ${context}
 
 Generate question ${questionNumber} of 7 for this personality assessment as well as identifying passions, inclinations, and morality. The question should:
+- Get them to reveal their inner thoughts, subtly through cases
 - Be case based "what would you do in this situation" types, which draw out their feelings.
 - Be less than 50 words.
 - Build upon previous responses to dig deeper into personality traits, passions, inclinations, morality
