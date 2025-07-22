@@ -25,44 +25,39 @@ export async function generateNextQuestion(
     ? `Previous responses: ${previousResponses.join("; ")}`
     : "This is the first question.";
 
-  const prompt = `You are conducting a personality assessment to match someone with a historical figure. 
+  const prompt = `You are conducting a personality assessment to match someone with a historical figure.
 
 ${context}
 
-You are conducting a comprehensive personality assessment to match someone with a historical figure. 
+Generate question ${questionNumber} of 7. Create a COMPLETELY DIFFERENT type of scenario from any previous questions.
 
-${context}
+DIVERSE SCENARIO TYPES (pick ONE that hasn't been used):
+- Leadership crisis: Leading a team through unexpected disaster
+- Creative challenge: Balancing innovation with practical constraints
+- Resource allocation: Distributing limited resources among competing needs
+- Social conflict: Mediating between opposing groups with valid concerns
+- Personal sacrifice: Choosing between personal gain and greater good
+- Knowledge vs action: Having information others don't - when to act/speak
+- Legacy building: How to be remembered vs immediate impact
+- Change vs tradition: Reforming established systems people depend on
 
-Generate question ${questionNumber} of 7. Each question MUST explore different aspects of personality. Use this variety framework:
-
-QUESTION THEMES TO ROTATE THROUGH:
-- Moral dilemmas & ethical choices
-- Leadership under pressure situations  
-- Risk vs security tradeoffs
-- Individual vs collective good decisions
-- Power and responsibility scenarios
-- Innovation vs tradition conflicts
-- Justice vs mercy situations
-
-Generate a situational question that:
-- Presents a realistic dilemma requiring a tough choice
-- Reveals core values, decision-making style, and moral compass
-- Is under 50 words
-- Differs completely from previous questions - NO REPETITION
-- Tests whether they prioritize: individual vs society, emotion vs logic, tradition vs change
-- Exposes their relationship with power, risk, and moral compromise
-- Builds on previous responses to dig deeper into personality patterns
-
-AVOID: Money questions if already asked, repetitive scenarios, obvious "right" answers
+Create a realistic scenario that:
+- Tests core values, decision-making patterns, and natural instincts
+- Reveals leadership style, risk tolerance, and moral priorities
+- Shows whether they're driven by logic, emotion, duty, or personal conviction
+- Exposes their relationship with power, influence, and responsibility
+- Under 45 words total
+- Has NO obvious "correct" answer - requires revealing personal philosophy
+- Is completely different from previous questions in both topic and approach
 
 Format as JSON:
 {
-  "title": "Brief Title",
-  "question": "You discover/face/witness [specific scenario]. What do you do and why?",
-  "placeholder": "I would..."
+  "title": "2-3 Word Title",
+  "question": "Engaging scenario that forces them to reveal their true nature and decision-making process",
+  "placeholder": "Brief response starter..."
 }
 
-Focus on revealing: leadership style, moral framework, risk tolerance, individualism vs collectivism, discipline, and core motivations. Make each question completely unique.
+Make it thought-provoking and personal. Focus on revealing character essence, not just moral choices.
 
 Only return the JSON, no other text.`;
 
@@ -82,6 +77,11 @@ Only return the JSON, no other text.`;
             ],
           },
         ],
+        generationConfig: {
+          temperature: 0.9,
+          topK: 40,
+          topP: 0.95
+        }
       }),
     });
 
@@ -130,16 +130,23 @@ export async function generatePersonalityAnalysis(responses: string[]): Promise<
 
 Responses: ${responses.join("; ")}
 
-Analyze the responses and match to the most suitable historical figure from ANY era or region of world history. Consider leaders, innovators, artists, philosophers, warriors, reformers, and visionaries from ancient civilizations to modern times - including figures from Asia, Africa, Americas, Europe, and all other continents across all time periods. Match based on personality patterns, decision-making style, moral framework, leadership approach, and core motivations rather than surface traits. Avoid defaulting to commonly known European Renaissance or American figures. Explore the full breadth of human history to find the most authentic personality match. Provide a detailed analysis in JSON format:
+Match to a WIDELY RECOGNIZED historical figure that most educated people would know - someone taught in world history classes with widespread cultural recognition. Focus on "household names" of history across all cultures and time periods.
+
+EXAMPLES OF APPROPRIATE FIGURES: Napoleon Bonaparte, Cleopatra VII, Leonardo da Vinci, Albert Einstein, Winston Churchill, Genghis Khan, Alexander the Great, Julius Caesar, Gandhi, Joan of Arc, Benjamin Franklin, Marie Curie, Theodore Roosevelt, Elizabeth I, Confucius, Hannibal, Catherine the Great, Abraham Lincoln, Mozart, Shakespeare, etc.
+
+AVOID: Obscure regional figures, lesser-known nobles, niche personalities, random chieftains, or anyone people would need to Google to recognize.
+
+Analyze responses and match based on personality patterns, decision-making style, moral framework, leadership approach, and core motivations. Provide detailed analysis in JSON format:
+
 {
   "character": "Historical Figure Name",
   "matchPercentage": 85-95,
   "description": "2-3 sentence description of why they match this figure",
-  "shortDescription": "3-7 word concise description of the character's role/identity (e.g., 'Florentine Statesman and Art Patron')",
+  "shortDescription": "3-7 word concise description of the character's role/identity",
   "biography": "3-4 paragraph biography about this historical figure, focusing on their character, leadership style, and what made them unique",
-  "birthYear": 1600,
-  "deathYear": 1500,
-  "location": "City, Country (e.g., 'Milan, Italy')",
+  "birthYear": 100,
+  "deathYear": 200,
+  "location": "City, Country",
   "achievements": ["3-4 key achievements of the historical figure"],
   "traits": [
     {"title": "Trait Name", "description": "How this trait manifests in both the person and historical figure"},
@@ -166,6 +173,11 @@ Only return the JSON, no other text.`;
             ],
           },
         ],
+        generationConfig: {
+          temperature: 0.8,
+          topK: 40,
+          topP: 0.9
+        }
       }),
     });
 
@@ -191,25 +203,26 @@ Only return the JSON, no other text.`;
     return JSON.parse(jsonString);
   } catch (error) {
     console.error("Error generating analysis:", error);
-    // Fallback analysis
+    // Fallback analysis - Changed to someone different to reduce Lorenzo bias
     return {
-      character: "Lorenzo de' Medici",
+      character: "Marcus Aurelius",
       matchPercentage: 88,
-      description: "A natural leader with vision and diplomatic skills.",
-      shortDescription: "Florentine Statesman and Art Patron",
-      biography: "Lorenzo de' Medici earned the title 'The Magnificent' not through conquest or wealth alone, but through his extraordinary ability to recognize and nurture human potential. As the de facto ruler of Florence during the High History, he transformed his city into the cultural beacon of Europe. What set Lorenzo apart was his understanding that true power comes from empowering others. He discovered Michelangelo as a young artist and provided him with both resources and creative freedom. He supported Botticelli, Poliziano, and countless other artists who would define the History spirit. Lorenzo was a master diplomat who preferred negotiation to warfare, seeing conflict as an opportunity for creative problem-solving. He believed that festivals, art, and celebration were not luxuries but necessities for a thriving society. His approach to leadership was fundamentally humanistic - he governed through inspiration rather than intimidation.",
-      birthYear: 1449,
-      deathYear: 1492,
-      location: "Florence, Italy",
+      description: "A thoughtful leader who balances wisdom with action, prioritizing long-term thinking and principled decision-making.",
+      shortDescription: "Philosopher Emperor and Stoic Leader",
+      biography: "Marcus Aurelius stood as one of history's most unique figures - a philosopher who wielded absolute power yet remained grounded in wisdom and humility. As Roman Emperor from 161 to 180 CE, he faced constant military campaigns, plague, and political challenges, yet never abandoned his commitment to Stoic philosophy and self-improvement. His personal journal, 'Meditations,' reveals a leader constantly examining his own actions and motivations, striving to serve the greater good rather than personal ambition. Marcus Aurelius believed that true leadership came from inner discipline and rational thinking, approaching each crisis with measured consideration rather than emotional reaction. He demonstrated that power could be wielded with wisdom, compassion, and an unwavering commitment to duty over personal desires.",
+      birthYear: 121,
+      deathYear: 180,
+      location: "Rome, Roman Empire",
       achievements: [
-        "Patron of History arts and culture",
-        "Skilled diplomat and political strategist",
-        "Economic innovator and banking pioneer"
+        "Successfully defended Roman Empire during multiple military campaigns",
+        "Authored 'Meditations', one of history's greatest philosophical works",
+        "Maintained stability during plague and internal conflicts",
+        "Exemplified philosopher-king ideal in actual governance"
       ],
       traits: [
-        { title: "Visionary", description: "Ability to see beyond the present" },
-        { title: "Diplomatic", description: "Skilled in negotiations and relationships" },
-        { title: "Cultural", description: "Appreciation for arts and learning" }
+        { title: "Reflective", description: "Both you and Marcus value deep thinking and self-examination before making decisions" },
+        { title: "Duty-Bound", description: "Strong sense of responsibility and commitment to serving something greater than yourself" },
+        { title: "Balanced", description: "Ability to combine practical action with philosophical wisdom and long-term perspective" }
       ]
     };
   }
