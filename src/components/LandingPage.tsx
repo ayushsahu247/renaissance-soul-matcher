@@ -37,10 +37,6 @@ export const LandingPage = ({ onStart }: LandingPageProps) => {
               Discover the History spirit within you through an elegant personality assessment. 
               Journey through thoughtful questions that reveal which historical figure mirrors your character.
             </p>
-            <p className="text-lg font-crimson text-muted-foreground">
-              This prototype focuses on matching you with <span className="font-semibold text-History-burgundy">Lorenzo "The Magnificent" de' Medici</span>, 
-              the legendary patron of arts and History leader.
-            </p>
           </div>
 
           {/* Features */}
