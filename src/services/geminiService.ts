@@ -30,11 +30,12 @@ export async function generateNextQuestion(
 ${context}
 
 Generate question ${questionNumber} of 7 for this personality assessment. The question should:
-- Be thoughtful and psychological in nature
+- Be easy and short to answer, shouldn't require a lot of effort.
 - Build upon previous responses to dig deeper into personality traits
 - Be designed to reveal character traits that could match historical figures
 - Be open-ended to allow detailed responses
 - Include a brief title (2-4 words) and the main question
+- Answerable in 20 words.
 
 Format your response as JSON:
 {
