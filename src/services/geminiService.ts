@@ -33,6 +33,7 @@ Generate question ${questionNumber} of 7 for this personality assessment. The qu
 - Be easy and short to answer, shouldn't require a lot of effort.
 - Build upon previous responses to dig deeper into personality traits
 - Be designed to reveal character traits that could match historical figures
+- Cannot ask which history character they relate to.
 - Be open-ended to allow detailed responses
 - Include a brief title (2-4 words) and the main question
 - Answerable in 20 words.
