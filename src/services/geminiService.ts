@@ -118,7 +118,7 @@ export async function generatePersonalityAnalysis(responses: string[]): Promise<
 
 Responses: ${responses.join("; ")}
 
-Analyze the responses and match to the most suitable great historical figure such as Napoleon, Lorenzo de Medici, King Charles I, Louis XVI, The Sun King, George Washington, etc. Show no bias towards Lorenzo de Medici. based on personality, skills, and morality. Provide a detailed analysis in JSON format:
+Analyze the responses and match to the most suitable great historical figure such as Napoleon, Lorenzo de Medici, King Charles I, Louis XVI, The Sun King, George Washington, (BUT NOT LIMITED TO THESE) etc. Show no bias towards Lorenzo de Medici. based on personality, skills, and morality. Provide a detailed analysis in JSON format:
 
 {
   "character": "Historical Figure Name",
