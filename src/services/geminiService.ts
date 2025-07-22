@@ -31,6 +31,7 @@ ${context}
 
 Generate question ${questionNumber} of 7 for this personality assessment as well as identifying passions, inclinations, and morality. The question should:
 - Be case based "what would you do in this situation" types, which draw out their feelings.
+- Only have a 5% chance of being about money.
 - Be less than 50 words.
 - Build upon previous responses to dig deeper into personality traits
 - Be designed to reveal character traits that could match historical figures
@@ -112,7 +113,7 @@ export async function generatePersonalityAnalysis(responses: string[]): Promise<
 
 Responses: ${responses.join("; ")}
 
-Analyze the responses and match to the most suitable historical figure based on personality, skills. Provide a detailed analysis in JSON format:
+Analyze the responses and match to the most suitable great historical figure such as Napoleon, Lorenzo de Medici, King Charles I, Louis XVI, The Sun King, George Washington, etc. Show no bias towards Lorenzo de Medici. based on personality, skills, and morality. Provide a detailed analysis in JSON format:
 
 {
   "character": "Historical Figure Name",
