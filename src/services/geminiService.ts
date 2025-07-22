@@ -31,14 +31,15 @@ ${context}
 
 Generate question ${questionNumber} of 7 for this personality assessment as well as identifying passions, inclinations, and morality. The question should:
 - Be case based "what would you do in this situation" types, which draw out their feelings.
-- Only have a 5% chance of being about money.
 - Be less than 50 words.
-- Build upon previous responses to dig deeper into personality traits
+- Build upon previous responses to dig deeper into personality traits, passions, inclinations, morality
+- Be different from the last one. Do not make every question about money, or about lost children... have variety.
+- Ask questions that gauge individuality vs society-oriented thinking.
+- Judge discipline, focus, weaknesses.
 - Be designed to reveal character traits that could match historical figures
 - Cannot ask which history character they relate to.
 - Be open-ended to allow detailed responses
 - Include a brief title (2-4 words) and the main question
-- Answerable in 50 words.
 
 Format your response as JSON:
 {
