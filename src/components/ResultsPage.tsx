@@ -78,7 +78,7 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
         {/* Header */}
         <div className="text-center mb-8">
           <Badge variant="secondary" className="mb-4 font-playfair">
-            Your Renaissance Match
+            Your Historical Match
           </Badge>
           <h1 className="text-4xl md:text-5xl font-playfair font-bold text-foreground mb-2">
             {result.character}

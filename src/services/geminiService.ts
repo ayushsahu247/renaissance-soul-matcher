@@ -1,5 +1,11 @@
-const GEMINI_API_KEY = "AIzaSyBqITkrtJSAVMhzEgFES5UZd0WtBlbdNP0";
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
+// --- Security Best Practice ---
+// The API key should be stored securely as an environment variable (e.g., process.env.GEMINI_API_KEY)
+// and not hardcoded directly in the source code.
+const GEMINI_API_KEY = "AIzaSyBqITkrtJSAVMhzEgFES5UZd0WtBlbdNP0"; // Replace with your actual key, preferably from an environment variable.
+
+// FIX: Updated the model name to a current, supported version.
+// The old 'gemini-pro' model name caused the 404 error.
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
 
 export interface GeminiResponse {
   candidates: Array<{
@@ -59,7 +65,10 @@ Only return the JSON, no other text.`;
     });
 
     if (!response.ok) {
-      throw new Error(`Gemini API error: ${response.status}`);
+        // Log the detailed error from the API for better debugging
+        const errorData = await response.json();
+        console.error("Gemini API error details:", errorData);
+        throw new Error(`Gemini API error: ${response.status}`);
     }
 
     const data: GeminiResponse = await response.json();
@@ -69,8 +78,13 @@ Only return the JSON, no other text.`;
       throw new Error("No response from Gemini API");
     }
 
-    // Parse the JSON response
-    const questionData = JSON.parse(text);
+    // FIX: Added robust JSON parsing to handle markdown wrappers.
+    // This extracts the JSON object from the potentially messy string from the model.
+    const startIndex = text.indexOf('{');
+    const endIndex = text.lastIndexOf('}');
+    const jsonString = text.substring(startIndex, endIndex + 1);
+
+    const questionData = JSON.parse(jsonString);
     return questionData.question;
   } catch (error) {
     console.error("Error generating question:", error);
@@ -126,7 +140,10 @@ Only return the JSON, no other text.`;
     });
 
     if (!response.ok) {
-      throw new Error(`Gemini API error: ${response.status}`);
+        // Log the detailed error from the API for better debugging
+        const errorData = await response.json();
+        console.error("Gemini API error details:", errorData);
+        throw new Error(`Gemini API error: ${response.status}`);
     }
 
     const data: GeminiResponse = await response.json();
@@ -136,7 +153,12 @@ Only return the JSON, no other text.`;
       throw new Error("No response from Gemini API");
     }
 
-    return JSON.parse(text);
+    // FIX: Added robust JSON parsing to handle markdown wrappers.
+    const startIndex = text.indexOf('{');
+    const endIndex = text.lastIndexOf('}');
+    const jsonString = text.substring(startIndex, endIndex + 1);
+    
+    return JSON.parse(jsonString);
   } catch (error) {
     console.error("Error generating analysis:", error);
     // Fallback analysis
