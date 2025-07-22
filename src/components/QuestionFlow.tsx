@@ -86,7 +86,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
     return (
       <div className="min-h-screen bg-gradient-elegant px-4 py-8">
         <div className="max-w-2xl mx-auto">
-          <Card className="shadow-renaissance border-0 bg-card/80 backdrop-blur-sm">
+          <Card className="shadow-History border-0 bg-card/80 backdrop-blur-sm">
             <CardContent className="p-8 text-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
               <p className="text-muted-foreground font-crimson">Generating your next question...</p>
@@ -114,11 +114,11 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
         </div>
 
         {/* Question Card */}
-        <Card className="shadow-renaissance border-0 bg-card/80 backdrop-blur-sm">
+        <Card className="shadow-History border-0 bg-card/80 backdrop-blur-sm">
           <CardContent className="p-8">
             {/* Question Header */}
             <div className="mb-6">
-              <h3 className="text-sm font-playfair font-medium text-renaissance-gold uppercase tracking-wider mb-2">
+              <h3 className="text-sm font-playfair font-medium text-History-gold uppercase tracking-wider mb-2">
                 {currentQ.title}
               </h3>
               <h2 className="text-2xl md:text-3xl font-playfair font-semibold text-foreground leading-tight">
@@ -132,7 +132,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
                 value={responses[currentQuestionIndex] || ""}
                 onChange={(e) => handleResponseChange(e.target.value)}
                 placeholder={currentQ.placeholder}
-                className="min-h-[150px] font-crimson text-base resize-none border-muted focus:border-renaissance-gold"
+                className="min-h-[150px] font-crimson text-base resize-none border-muted focus:border-History-gold"
               />
               <p className="text-xs text-muted-foreground mt-2 font-crimson">
                 Please write at least a few sentences to continue.
@@ -152,7 +152,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
 
               <Button
                 onClick={handleNext}
-                variant="renaissance"
+                variant="History"
                 disabled={!canProceed}
                 className="font-crimson"
               >

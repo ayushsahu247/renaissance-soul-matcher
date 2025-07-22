@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Renaissance Design System - Rich colors inspired by Italian Renaissance */
+/* History Design System - Rich colors inspired by Italian History */
 
 @layer base {
   :root {
-    /* Renaissance Color Palette */
+    /* History Color Palette */
     --background: 45 15% 97%;
     --foreground: 25 20% 15%;
 
@@ -39,11 +39,11 @@
     --input: 30 20% 85%;
     --ring: 355 45% 32%;
 
-    /* Custom Renaissance Tokens */
-    --renaissance-burgundy: 355 45% 32%;
-    --renaissance-gold: 45 70% 65%;
-    --renaissance-brown: 30 25% 25%;
-    --renaissance-cream: 45 25% 95%;
+    /* Custom History Tokens */
+    --History-burgundy: 355 45% 32%;
+    --History-gold: 45 70% 65%;
+    --History-brown: 30 25% 25%;
+    --History-cream: 45 25% 95%;
     
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(355 45% 32%), hsl(355 40% 40%));
@@ -51,7 +51,7 @@
     --gradient-elegant: linear-gradient(180deg, hsl(45 15% 97%), hsl(45 25% 95%));
     
     /* Shadows */
-    --shadow-renaissance: 0 10px 30px -10px hsl(355 45% 32% / 0.2);
+    --shadow-History: 0 10px 30px -10px hsl(355 45% 32% / 0.2);
     --shadow-gold-glow: 0 0 20px hsl(45 70% 65% / 0.3);
 
     --radius: 0.5rem;

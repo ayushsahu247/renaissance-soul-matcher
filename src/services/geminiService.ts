@@ -1,7 +1,7 @@
 // --- Security Best Practice ---
 // The API key should be stored securely as an environment variable (e.g., process.env.GEMINI_API_KEY)
 // and not hardcoded directly in the source code.
-const GEMINI_API_KEY = "AIzaSyBqITkrtJSAVMhzEgFES5UZd0WtBlbdNP0"; // Replace with your actual key, preferably from an environment variable.
+const GEMINI_API_KEY = "Gemini API Key"; // Replace with your actual key, preferably from an environment variable.
 
 // FIX: Updated the model name to a current, supported version.
 // The old 'gemini-pro' model name caused the 404 error.
@@ -177,12 +177,12 @@ Only return the JSON, no other text.`;
       matchPercentage: 88,
       description: "A natural leader with vision and diplomatic skills.",
       shortDescription: "Florentine Statesman and Art Patron",
-      biography: "Lorenzo de' Medici earned the title 'The Magnificent' not through conquest or wealth alone, but through his extraordinary ability to recognize and nurture human potential. As the de facto ruler of Florence during the High Renaissance, he transformed his city into the cultural beacon of Europe. What set Lorenzo apart was his understanding that true power comes from empowering others. He discovered Michelangelo as a young artist and provided him with both resources and creative freedom. He supported Botticelli, Poliziano, and countless other artists who would define the Renaissance spirit. Lorenzo was a master diplomat who preferred negotiation to warfare, seeing conflict as an opportunity for creative problem-solving. He believed that festivals, art, and celebration were not luxuries but necessities for a thriving society. His approach to leadership was fundamentally humanistic - he governed through inspiration rather than intimidation.",
+      biography: "Lorenzo de' Medici earned the title 'The Magnificent' not through conquest or wealth alone, but through his extraordinary ability to recognize and nurture human potential. As the de facto ruler of Florence during the High History, he transformed his city into the cultural beacon of Europe. What set Lorenzo apart was his understanding that true power comes from empowering others. He discovered Michelangelo as a young artist and provided him with both resources and creative freedom. He supported Botticelli, Poliziano, and countless other artists who would define the History spirit. Lorenzo was a master diplomat who preferred negotiation to warfare, seeing conflict as an opportunity for creative problem-solving. He believed that festivals, art, and celebration were not luxuries but necessities for a thriving society. His approach to leadership was fundamentally humanistic - he governed through inspiration rather than intimidation.",
       birthYear: 1449,
       deathYear: 1492,
       location: "Florence, Italy",
       achievements: [
-        "Patron of Renaissance arts and culture",
+        "Patron of History arts and culture",
         "Skilled diplomat and political strategist",
         "Economic innovator and banking pioneer"
       ],

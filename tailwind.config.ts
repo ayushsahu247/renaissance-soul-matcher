@@ -66,11 +66,11 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				'renaissance': {
-					burgundy: 'hsl(var(--renaissance-burgundy))',
-					gold: 'hsl(var(--renaissance-gold))',
-					brown: 'hsl(var(--renaissance-brown))',
-					cream: 'hsl(var(--renaissance-cream))',
+				'History': {
+					burgundy: 'hsl(var(--History-burgundy))',
+					gold: 'hsl(var(--History-gold))',
+					brown: 'hsl(var(--History-brown))',
+					cream: 'hsl(var(--History-cream))',
 				}
 			},
 			backgroundImage: {
@@ -79,7 +79,7 @@ export default {
 				'gradient-elegant': 'var(--gradient-elegant)',
 			},
 			boxShadow: {
-				'renaissance': 'var(--shadow-renaissance)',
+				'History': 'var(--shadow-History)',
 				'gold-glow': 'var(--shadow-gold-glow)',
 			},
 			borderRadius: {

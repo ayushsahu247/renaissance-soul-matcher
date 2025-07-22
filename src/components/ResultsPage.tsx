@@ -36,12 +36,12 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
     matchPercentage: 88,
     description: "A natural leader with vision and diplomatic skills.",
     shortDescription: "Florentine Statesman and Art Patron",
-    biography: "Lorenzo de' Medici earned the title 'The Magnificent' not through conquest or wealth alone, but through his extraordinary ability to recognize and nurture human potential. As the de facto ruler of Florence during the High Renaissance, he transformed his city into the cultural beacon of Europe. What set Lorenzo apart was his understanding that true power comes from empowering others. He discovered Michelangelo as a young artist and provided him with both resources and creative freedom. He supported Botticelli, Poliziano, and countless other artists who would define the Renaissance spirit. Lorenzo was a master diplomat who preferred negotiation to warfare, seeing conflict as an opportunity for creative problem-solving. He believed that festivals, art, and celebration were not luxuries but necessities for a thriving society. His approach to leadership was fundamentally humanistic - he governed through inspiration rather than intimidation.",
+    biography: "Lorenzo de' Medici earned the title 'The Magnificent' not through conquest or wealth alone, but through his extraordinary ability to recognize and nurture human potential. As the de facto ruler of Florence during the High History, he transformed his city into the cultural beacon of Europe. What set Lorenzo apart was his understanding that true power comes from empowering others. He discovered Michelangelo as a young artist and provided him with both resources and creative freedom. He supported Botticelli, Poliziano, and countless other artists who would define the History spirit. Lorenzo was a master diplomat who preferred negotiation to warfare, seeing conflict as an opportunity for creative problem-solving. He believed that festivals, art, and celebration were not luxuries but necessities for a thriving society. His approach to leadership was fundamentally humanistic - he governed through inspiration rather than intimidation.",
     birthYear: 1449,
     deathYear: 1492,
     location: "Florence, Italy",
     achievements: [
-      "Patron of Renaissance arts and culture",
+      "Patron of History arts and culture",
       "Skilled diplomat and political strategist",
       "Economic innovator and banking pioneer"
     ],
@@ -71,28 +71,50 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
   }, [result.character]);
 
   const handleShare = async () => {
-    const shareText = `I just discovered my Renaissance spirit! I'm a ${result.matchPercentage}% match with ${result.character} - ${result.description} Take the assessment: ${window.location.origin}`;
+    const shareText = `🎭 I just discovered my History spirit! I'm ${result.matchPercentage}% ${result.character} - ${result.shortDescription}
+
+Take the assessment yourself: ${window.location.origin}`;
     
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'My Renaissance Spirit Match',
+          title: 'My History Spirit Match',
           text: shareText,
         });
       } catch (err) {
-        // Fall back to clipboard
-        navigator.clipboard.writeText(shareText);
-        toast({
-          title: "Link copied!",
-          description: "Share link copied to clipboard",
-        });
+        // Fall back to clipboard if share is cancelled or fails
+        if (err instanceof Error && err.name !== 'AbortError') {
+          await navigator.clipboard.writeText(shareText);
+          toast({
+            title: "Link copied!",
+            description: "Share text copied to clipboard",
+          });
+        }
       }
     } else {
-      navigator.clipboard.writeText(shareText);
-      toast({
-        title: "Link copied!",
-        description: "Share link copied to clipboard",
-      });
+      // Fallback for browsers without Web Share API
+      try {
+        await navigator.clipboard.writeText(shareText);
+        toast({
+          title: "Link copied!",
+          description: "Share text copied to clipboard",
+        });
+      } catch (err) {
+        // Final fallback - create a temporary textarea for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = shareText;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        
+        toast({
+          title: "Link copied!",
+          description: "Share text copied to clipboard",
+        });
+      }
     }
   };
 
@@ -153,11 +175,11 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
 
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
           {/* Portrait & Basic Info */}
-          <Card className="shadow-renaissance border-0">
+          <Card className="shadow-History border-0">
             <CardContent className="p-6">
               <div className="text-center mb-6">
                 {imageLoading ? (
-                  <div className="w-48 h-48 mx-auto rounded-lg shadow-renaissance bg-muted animate-pulse mb-4 flex items-center justify-center">
+                  <div className="w-48 h-48 mx-auto rounded-lg shadow-History bg-muted animate-pulse mb-4 flex items-center justify-center">
                     <span className="text-sm text-muted-foreground">Loading...</span>
                   </div>
                 ) : (
@@ -165,7 +187,7 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
                     <img 
                       src={characterImage?.imageUrl || lorenzoPortrait}
                       alt={characterImage?.description || `Portrait of ${result.character}`}
-                      className="w-48 h-48 mx-auto rounded-lg shadow-renaissance object-cover mb-4"
+                      className="w-48 h-48 mx-auto rounded-lg shadow-History object-cover mb-4"
                       onError={(e) => {
                         // Fallback to default image if Wikipedia image fails to load
                         (e.target as HTMLImageElement).src = lorenzoPortrait;
@@ -179,7 +201,7 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
                   </div>
                 )}
                 <div className="flex items-center justify-center mb-2">
-                  <Crown className="h-5 w-5 text-renaissance-gold mr-2" />
+                  <Crown className="h-5 w-5 text-History-gold mr-2" />
                   <span className="font-playfair text-lg font-semibold">
                     {result.birthYear} - {result.deathYear}
                   </span>
@@ -199,7 +221,7 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
           </Card>
 
           {/* Character Analysis */}
-          <Card className="shadow-renaissance border-0">
+          <Card className="shadow-History border-0">
             <CardContent className="p-6">
               <h3 className="font-playfair font-semibold text-xl mb-6 text-center">
                 Why You Match {result.character}
@@ -233,7 +255,7 @@ export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => 
         </div>
 
         {/* Dynamic Biography */}
-        <Card className="shadow-renaissance border-0 mb-8">
+        <Card className="shadow-History border-0 mb-8">
           <CardContent className="p-6">
             <h3 className="font-playfair font-semibold text-xl mb-4 text-center">
               The Character of {result.character}

@@ -17,12 +17,12 @@ interface AnalysisScreenProps {
 
 const analysisMessages = [
   { icon: Book, text: "Analyzing your character traits..." },
-  { icon: Crown, text: "Comparing with Renaissance leaders..." },
+  { icon: Crown, text: "Comparing with History leaders..." },
   { icon: Palette, text: "Evaluating your cultural affinity..." },
   { icon: Crown, text: "Examining your leadership style..." },
   { icon: Book, text: "Studying your values and principles..." },
   { icon: Palette, text: "Calculating historical compatibility..." },
-  { icon: Crown, text: "Finalizing your Renaissance match..." }
+  { icon: Crown, text: "Finalizing your History match..." }
 ];
 
 export const AnalysisScreen = ({ responses, onComplete }: AnalysisScreenProps) => {
@@ -76,7 +76,7 @@ export const AnalysisScreen = ({ responses, onComplete }: AnalysisScreenProps) =
             matchPercentage: 88,
             description: "A natural leader with vision and diplomatic skills.",
             achievements: [
-              "Patron of Renaissance arts and culture",
+              "Patron of History arts and culture",
               "Skilled diplomat and political strategist",
               "Economic innovator and banking pioneer"
             ],
@@ -103,16 +103,16 @@ export const AnalysisScreen = ({ responses, onComplete }: AnalysisScreenProps) =
           <div className="w-24 h-24 mx-auto mb-4 relative">
             <div className="absolute inset-0 rounded-full bg-gradient-gold opacity-20 animate-pulse" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <CurrentIcon className="h-12 w-12 text-renaissance-burgundy" />
+              <CurrentIcon className="h-12 w-12 text-History-burgundy" />
             </div>
           </div>
-          <Loader2 className="h-6 w-6 mx-auto text-renaissance-gold animate-spin" />
+          <Loader2 className="h-6 w-6 mx-auto text-History-gold animate-spin" />
         </div>
 
         {/* Current Message */}
         <div className="mb-8">
           <h2 className="text-2xl font-playfair font-semibold text-foreground mb-4">
-            Discovering Your Renaissance Spirit
+            Discovering Your History Spirit
           </h2>
           <p 
             key={currentMessage}
@@ -137,7 +137,7 @@ export const AnalysisScreen = ({ responses, onComplete }: AnalysisScreenProps) =
 
         {/* Subtitle */}
         <p className="text-sm font-crimson text-muted-foreground/70 mt-8">
-          Matching you with historical figures from the Italian Renaissance...
+          Matching you with historical figures from the Italian History...
         </p>
       </div>
     </div>
