@@ -29,14 +29,15 @@ export async function generateNextQuestion(
 
 ${context}
 
-Generate question ${questionNumber} of 7 for this personality assessment. The question should:
-- Be easy and short to answer, shouldn't require a lot of effort.
+Generate question ${questionNumber} of 7 for this personality assessment as well as identifying passions, inclinations, and morality. The question should:
+- Be case based "what would you do in this situation" types, which draw out their feelings.
+- Be less than 50 words.
 - Build upon previous responses to dig deeper into personality traits
 - Be designed to reveal character traits that could match historical figures
 - Cannot ask which history character they relate to.
 - Be open-ended to allow detailed responses
 - Include a brief title (2-4 words) and the main question
-- Answerable in 20 words.
+- Answerable in 50 words.
 
 Format your response as JSON:
 {
@@ -111,7 +112,7 @@ export async function generatePersonalityAnalysis(responses: string[]): Promise<
 
 Responses: ${responses.join("; ")}
 
-Analyze the responses and match to the most suitable historical figure. Provide a detailed analysis in JSON format:
+Analyze the responses and match to the most suitable historical figure based on personality, skills. Provide a detailed analysis in JSON format:
 
 {
   "character": "Historical Figure Name",
