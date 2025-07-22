@@ -126,9 +126,9 @@ Analyze the responses and match to the most suitable great historical figure suc
   "description": "2-3 sentence description of why they match this figure",
   "shortDescription": "3-7 word concise description of the character's role/identity (e.g., 'Florentine Statesman and Art Patron')",
   "biography": "3-4 paragraph biography about this historical figure, focusing on their character, leadership style, and what made them unique",
-  "birthYear": 1449,
-  "deathYear": 1492,
-  "location": "City, Country (e.g., 'Florence, Italy')",
+  "birthYear": 1600,
+  "deathYear": 1500,
+  "location": "City, Country (e.g., 'Milan, Italy')",
   "achievements": ["3-4 key achievements of the historical figure"],
   "traits": [
     {"title": "Trait Name", "description": "How this trait manifests in both the person and historical figure"},
