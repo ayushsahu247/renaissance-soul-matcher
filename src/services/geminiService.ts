@@ -1,7 +1,7 @@
 // --- Security Best Practice ---
 // The API key should be stored securely as an environment variable (e.g., process.env.GEMINI_API_KEY)
 // and not hardcoded directly in the source code.
-const GEMINI_API_KEY = "Gemini API Key"; // Replace with your actual key, preferably from an environment variable.
+const GEMINI_API_KEY = "AIzaSyBqITkrtJSAVMhzEgFES5UZd0WtBlbdNP0"; // Replace with your actual key, preferably from an environment variable.
 
 // FIX: Updated the model name to a current, supported version.
 // The old 'gemini-pro' model name caused the 404 error.
