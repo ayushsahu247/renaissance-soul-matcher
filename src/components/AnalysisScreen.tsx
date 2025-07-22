@@ -1,8 +1,18 @@
 import { useEffect, useState } from "react";
 import { Loader2, Crown, Palette, Book } from "lucide-react";
+import { generatePersonalityAnalysis } from "@/services/geminiService";
+
+interface AnalysisResult {
+  character: string;
+  matchPercentage: number;
+  description: string;
+  achievements: string[];
+  traits: Array<{ title: string; description: string }>;
+}
 
 interface AnalysisScreenProps {
-  onComplete: () => void;
+  responses: string[];
+  onComplete: (result: AnalysisResult) => void;
 }
 
 const analysisMessages = [
@@ -15,42 +25,73 @@ const analysisMessages = [
   { icon: Crown, text: "Finalizing your Renaissance match..." }
 ];
 
-export const AnalysisScreen = ({ onComplete }: AnalysisScreenProps) => {
+export const AnalysisScreen = ({ responses, onComplete }: AnalysisScreenProps) => {
   const [currentMessage, setCurrentMessage] = useState(0);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const totalDuration = 4000; // 4 seconds total
-    const messageInterval = totalDuration / analysisMessages.length;
-    
-    // Progress animation
-    const progressInterval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
+    const runAnalysis = async () => {
+      const totalDuration = 4000;
+      const messageInterval = totalDuration / analysisMessages.length;
+      
+      // Progress animation
+      const progressInterval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(progressInterval);
+            return 100;
+          }
+          return prev + 2;
+        });
+      }, totalDuration / 50);
+
+      // Message cycling
+      const messageTimer = setInterval(() => {
+        setCurrentMessage(prev => {
+          if (prev >= analysisMessages.length - 1) {
+            clearInterval(messageTimer);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, messageInterval);
+
+      try {
+        // Generate analysis while showing progress
+        const result = await generatePersonalityAnalysis(responses);
+        
+        // Wait for animation to complete
+        setTimeout(() => {
           clearInterval(progressInterval);
-          setTimeout(onComplete, 500);
-          return 100;
-        }
-        return prev + 2;
-      });
-    }, totalDuration / 50);
-
-    // Message cycling
-    const messageTimer = setInterval(() => {
-      setCurrentMessage(prev => {
-        if (prev >= analysisMessages.length - 1) {
           clearInterval(messageTimer);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, messageInterval);
-
-    return () => {
-      clearInterval(progressInterval);
-      clearInterval(messageTimer);
+          onComplete(result);
+        }, totalDuration + 500);
+      } catch (error) {
+        console.error("Analysis error:", error);
+        setTimeout(() => {
+          clearInterval(progressInterval);
+          clearInterval(messageTimer);
+          onComplete({
+            character: "Lorenzo de' Medici",
+            matchPercentage: 88,
+            description: "A natural leader with vision and diplomatic skills.",
+            achievements: [
+              "Patron of Renaissance arts and culture",
+              "Skilled diplomat and political strategist",
+              "Economic innovator and banking pioneer"
+            ],
+            traits: [
+              { title: "Visionary", description: "Ability to see beyond the present" },
+              { title: "Diplomatic", description: "Skilled in negotiations and relationships" },
+              { title: "Cultural", description: "Appreciation for arts and learning" }
+            ]
+          });
+        }, totalDuration + 500);
+      }
     };
-  }, [onComplete]);
+
+    runAnalysis();
+  }, [responses, onComplete]);
 
   const CurrentIcon = analysisMessages[currentMessage].icon;
 

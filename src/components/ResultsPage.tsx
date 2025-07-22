@@ -6,16 +6,41 @@ import { Crown, Share2, RotateCcw, Heart, Palette, Users, Trophy } from "lucide-
 import lorenzoPortrait from "@/assets/lorenzo-portrait.jpg";
 import { useToast } from "@/hooks/use-toast";
 
+interface AnalysisResult {
+  character: string;
+  matchPercentage: number;
+  description: string;
+  achievements: string[];
+  traits: Array<{ title: string; description: string }>;
+}
+
 interface ResultsPageProps {
+  analysisResult: AnalysisResult | null;
   onRestart: () => void;
 }
 
-export const ResultsPage = ({ onRestart }: ResultsPageProps) => {
-  const [matchPercentage] = useState(Math.floor(Math.random() * 8) + 85); // 85-92%
+export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => {
   const { toast } = useToast();
+  
+  // Fallback to default if no analysis result
+  const result = analysisResult || {
+    character: "Lorenzo de' Medici",
+    matchPercentage: 88,
+    description: "A natural leader with vision and diplomatic skills.",
+    achievements: [
+      "Patron of Renaissance arts and culture",
+      "Skilled diplomat and political strategist",
+      "Economic innovator and banking pioneer"
+    ],
+    traits: [
+      { title: "Visionary", description: "Ability to see beyond the present" },
+      { title: "Diplomatic", description: "Skilled in negotiations and relationships" },
+      { title: "Cultural", description: "Appreciation for arts and learning" }
+    ]
+  };
 
   const handleShare = async () => {
-    const shareText = `I just discovered my Renaissance spirit! I'm a ${matchPercentage}% match with Lorenzo de' Medici "The Magnificent" - the legendary patron of arts and Renaissance leader. Take the assessment: ${window.location.origin}`;
+    const shareText = `I just discovered my Renaissance spirit! I'm a ${result.matchPercentage}% match with ${result.character} - ${result.description} Take the assessment: ${window.location.origin}`;
     
     if (navigator.share) {
       try {
@@ -56,10 +81,10 @@ export const ResultsPage = ({ onRestart }: ResultsPageProps) => {
             Your Renaissance Match
           </Badge>
           <h1 className="text-4xl md:text-5xl font-playfair font-bold text-foreground mb-2">
-            Lorenzo de' Medici
+            {result.character}
           </h1>
           <p className="text-xl font-playfair italic text-muted-foreground">
-            "The Magnificent"
+            Historical Renaissance Figure
           </p>
         </div>
 
@@ -67,7 +92,7 @@ export const ResultsPage = ({ onRestart }: ResultsPageProps) => {
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-gold mb-4 shadow-gold-glow">
             <span className="text-4xl font-playfair font-bold text-foreground">
-              {matchPercentage}%
+              {result.matchPercentage}%
             </span>
           </div>
           <p className="text-lg font-crimson text-muted-foreground">
@@ -82,7 +107,7 @@ export const ResultsPage = ({ onRestart }: ResultsPageProps) => {
               <div className="text-center mb-6">
                 <img 
                   src={lorenzoPortrait}
-                  alt="Lorenzo de' Medici portrait"
+                  alt={`${result.character} portrait`}
                   className="w-48 h-48 mx-auto rounded-lg shadow-renaissance object-cover mb-4"
                 />
                 <div className="flex items-center justify-center mb-2">
@@ -95,11 +120,9 @@ export const ResultsPage = ({ onRestart }: ResultsPageProps) => {
               <div className="space-y-3">
                 <h3 className="font-playfair font-semibold text-lg text-center mb-4">Key Achievements</h3>
                 <ul className="space-y-2 font-crimson text-sm">
-                  <li>• Patron of Michelangelo, Botticelli, and other Renaissance masters</li>
-                  <li>• Transformed Florence into the cultural capital of Europe</li>
-                  <li>• Maintained peace through diplomatic excellence</li>
-                  <li>• Founded the Platonic Academy of Florence</li>
-                  <li>• Wrote poetry and supported humanist philosophy</li>
+                  {result.achievements.map((achievement, index) => (
+                    <li key={index}>• {achievement}</li>
+                  ))}
                 </ul>
               </div>
             </CardContent>
@@ -109,28 +132,30 @@ export const ResultsPage = ({ onRestart }: ResultsPageProps) => {
           <Card className="shadow-renaissance border-0">
             <CardContent className="p-6">
               <h3 className="font-playfair font-semibold text-xl mb-6 text-center">
-                Why You Match Lorenzo
+                Why You Match {result.character}
               </h3>
               
               <div className="space-y-4 mb-6">
-                {traits.map((trait, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-gold flex items-center justify-center">
-                      <trait.icon className="h-4 w-4 text-foreground" />
+                {result.traits.map((trait, index) => {
+                  const icons = [Palette, Heart, Users, Trophy];
+                  const IconComponent = icons[index] || Palette;
+                  return (
+                    <div key={index} className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-gold flex items-center justify-center">
+                        <IconComponent className="h-4 w-4 text-foreground" />
+                      </div>
+                      <div>
+                        <h4 className="font-playfair font-medium text-foreground">{trait.title}</h4>
+                        <p className="font-crimson text-sm text-muted-foreground">{trait.description}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-playfair font-medium text-foreground">{trait.title}</h4>
-                      <p className="font-crimson text-sm text-muted-foreground">{trait.description}</p>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <div className="bg-muted/50 rounded-lg p-4">
                 <p className="font-crimson text-sm text-foreground/80 leading-relaxed">
-                  Like Lorenzo, you understand that true leadership comes from nurturing others and creating 
-                  environments where creativity and human potential can flourish. You value diplomacy over 
-                  conflict, relationships over transactions, and lasting impact over immediate gains.
+                  {result.description}
                 </p>
               </div>
             </CardContent>

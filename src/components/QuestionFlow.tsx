@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { generateNextQuestion } from "@/services/geminiService";
 
 interface Question {
   id: number;
@@ -12,86 +13,89 @@ interface Question {
   placeholder: string;
 }
 
-const questions: Question[] = [
-  {
-    id: 1,
-    title: "Conflict Resolution",
-    question: "Describe how you handle conflict and disagreements with others.",
-    placeholder: "When faced with conflict, I tend to..."
-  },
-  {
-    id: 2,
-    title: "Arts & Creativity",
-    question: "What role do arts, creativity, and beauty play in your life?",
-    placeholder: "Art and creativity in my life are..."
-  },
-  {
-    id: 3,
-    title: "Building Relationships", 
-    question: "How do you approach building and maintaining relationships?",
-    placeholder: "In relationships, I believe in..."
-  },
-  {
-    id: 4,
-    title: "Leadership Style",
-    question: "Describe your approach to leadership and influencing others.",
-    placeholder: "My leadership style involves..."
-  },
-  {
-    id: 5,
-    title: "Values & Priorities",
-    question: "What are your core values and how do they guide your decisions?",
-    placeholder: "My core values include..."
-  },
-  {
-    id: 6,
-    title: "Legacy & Impact",
-    question: "What kind of legacy or impact do you hope to leave behind?",
-    placeholder: "I hope to be remembered for..."
-  },
-  {
-    id: 7,
-    title: "Joy & Celebration",
-    question: "How do you create joy and celebration in your community or circle?",
-    placeholder: "I bring joy to others by..."
-  }
-];
-
 interface QuestionFlowProps {
   onComplete: (responses: string[]) => void;
   onBack: () => void;
 }
 
 export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [responses, setResponses] = useState<string[]>(new Array(questions.length).fill(""));
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [responses, setResponses] = useState<string[]>([]);
+  const [currentQ, setCurrentQ] = useState<Question | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const totalQuestions = 7;
+  const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+  const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
+  const canProceed = responses[currentQuestionIndex]?.trim().length > 10;
+
+  useEffect(() => {
+    loadQuestion();
+  }, [currentQuestionIndex]);
+
+  const loadQuestion = async () => {
+    setIsLoading(true);
+    try {
+      const questionText = await generateNextQuestion(
+        currentQuestionIndex + 1,
+        responses.slice(0, currentQuestionIndex)
+      );
+      
+      setCurrentQ({
+        id: currentQuestionIndex + 1,
+        title: `Question ${currentQuestionIndex + 1}`,
+        question: questionText,
+        placeholder: "Share your thoughts and experiences..."
+      });
+    } catch (error) {
+      console.error("Error loading question:", error);
+      setCurrentQ({
+        id: currentQuestionIndex + 1,
+        title: `Question ${currentQuestionIndex + 1}`,
+        question: "Tell me about yourself and what drives you.",
+        placeholder: "Share your thoughts and experiences..."
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleResponseChange = (value: string) => {
     const newResponses = [...responses];
-    newResponses[currentQuestion] = value;
+    newResponses[currentQuestionIndex] = value;
     setResponses(newResponses);
   };
 
   const handleNext = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestionIndex < totalQuestions - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      onComplete(responses);
+      onComplete(responses.filter(response => response.trim() !== ""));
     }
   };
 
   const handlePrevious = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
     } else {
       onBack();
     }
   };
 
-  const progress = ((currentQuestion + 1) / questions.length) * 100;
-  const currentQ = questions[currentQuestion];
-  const isLastQuestion = currentQuestion === questions.length - 1;
-  const canProceed = responses[currentQuestion].trim().length > 10;
+  if (isLoading || !currentQ) {
+    return (
+      <div className="min-h-screen bg-gradient-elegant px-4 py-8">
+        <div className="max-w-2xl mx-auto">
+          <Card className="shadow-renaissance border-0 bg-card/80 backdrop-blur-sm">
+            <CardContent className="p-8 text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+              <p className="text-muted-foreground font-crimson">Generating your next question...</p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-elegant px-4 py-8">
@@ -100,7 +104,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-crimson text-muted-foreground">
-              Question {currentQuestion + 1} of {questions.length}
+              Question {currentQuestionIndex + 1} of {totalQuestions}
             </span>
             <span className="text-sm font-crimson text-muted-foreground">
               {Math.round(progress)}% Complete
@@ -125,7 +129,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
             {/* Response Area */}
             <div className="mb-6">
               <Textarea
-                value={responses[currentQuestion]}
+                value={responses[currentQuestionIndex] || ""}
                 onChange={(e) => handleResponseChange(e.target.value)}
                 placeholder={currentQ.placeholder}
                 className="min-h-[150px] font-crimson text-base resize-none border-muted focus:border-renaissance-gold"
@@ -143,7 +147,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
                 className="font-crimson"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                {currentQuestion === 0 ? "Back to Start" : "Previous"}
+                {currentQuestionIndex === 0 ? "Back to Start" : "Previous"}
               </Button>
 
               <Button
