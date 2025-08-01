@@ -24,7 +24,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
   const [currentQ, setCurrentQ] = useState<Question | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   
-  const totalQuestions = 7;
+  const totalQuestions = 5;
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
   const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
   const canProceed = responses[currentQuestionIndex]?.trim().length > 10;
