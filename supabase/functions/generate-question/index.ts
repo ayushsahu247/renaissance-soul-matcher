@@ -24,15 +24,10 @@ serve(async (req) => {
   try {
     const { questionNumber, previousResponses } = await req.json();
     
-    console.log("Received request:", { questionNumber, previousResponses });
-    
     const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
     if (!GEMINI_API_KEY) {
-      console.error('GEMINI_API_KEY not found in environment');
       throw new Error('GEMINI_API_KEY not configured');
     }
-    
-    console.log("API key found, making request to Gemini...");
 
     const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
 
@@ -109,8 +104,6 @@ Only return the JSON, no other text.`;
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Gemini API error:", errorData);
-      console.error("Response status:", response.status);
-      console.error("Response headers:", response.headers);
       throw new Error(`Gemini API error: ${response.status}`);
     }
 
