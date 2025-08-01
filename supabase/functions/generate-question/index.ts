@@ -35,48 +35,33 @@ serve(async (req) => {
       ? `Previous responses: ${previousResponses.join("; ")}`
       : "This is the first question.";
 
-    const prompt = `You are conducting a personality assessment to match someone with a historical figure.
+    const prompt = `Generate question ${questionNumber} of 7 for a personality assessment.
 
 ${context}
 
-Generate question ${questionNumber} of 7. Create a COMPLETELY DIFFERENT type of question from any previous ones.
+Create a simple, generic question that helps understand someone's personality and who they might relate to. 
 
-DIVERSE QUESTION TYPES (pick ONE that hasn't been used):
-- Casual scenario: Everyday situation that reveals character
-- Value hierarchy: "What matters most to you between..." (no explanations needed)
-- Abstract preference: Personal ideals and lifestyle choices
-- Social observation: "What do you think about..." (controversial but gently framed)
-- Philosophical choice: Simple either/or with brief reasoning
-- Personal instinct: "Your natural reaction when..."
-- Legacy thinking: How you want to be remembered
-- Change perspective: Your approach to tradition vs innovation
+Question types to use:
+- Who do you relate to and why?
+- What type of person inspires you?
+- Which historical figure would you want to have dinner with?
+- What kind of leader do you admire?
+- Who would you consider a role model?
+- What qualities do you most respect in others?
+- Which famous person shares your values?
 
-Create a question that:
-- Feels like a relaxed conversation over coffee
-- Tests core values and natural instincts
-- Reveals leadership style, moral priorities, and worldview
-- Shows their relationship with power, people, and principles
-- Under 35 words total
-- Sounds natural and conversational - avoid "explain your reasoning"
-- Touches on meaningful topics without being preachy or academic
-- Has NO obvious connection to specific historical figures
-- Is completely different from previous questions in style and content
-
-For sensitive topics (race, gender, politics), frame them naturally:
-- "Do you think men and women naturally excel at different things?"
-- "What's your honest take on whether all cultures are equally valuable?"
-- Keep it conversational, not confrontational
-
-Append a "Prompt working" at the end of every question.
+Keep the question:
+- Simple and direct
+- Under 20 words
+- Easy to understand
+- Focused on personal connection and relatability
 
 Format as JSON:
 {
-  "title": "2-3 Word Title", 
-  "question": "Natural, conversational question that reveals their character", + "PROMPT WORKING"
+  "title": "Question ${questionNumber}",
+  "question": "Simple question about who they relate to or admire",
   "placeholder": "Start typing..."
 }
-
-Make it feel like an interesting person asking a thoughtful question, not a psychology test.
 
 Only return the JSON, no other text.`;
 
