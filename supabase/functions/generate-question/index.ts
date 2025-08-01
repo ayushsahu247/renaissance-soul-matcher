@@ -43,7 +43,7 @@ QUESTION TYPE:
 ${questionNumber === 1 ? 'ETHICAL DILEMMAS - Force a choice between competing values (justice vs mercy, loyalty vs truth, etc.)' : ''}${questionNumber === 2 ? 'INNER DRIVES - Reveal what motivates them (power, recognition, peace, legacy, etc.)' : ''}${questionNumber === 3 ? 'CORE VALUES - Test fundamental beliefs (tradition vs change, freedom vs order, etc.)' : ''}${questionNumber === 4 ? 'HANDLING ADVERSITY - Show how they deal with failure, betrayal, or setbacks' : ''}${questionNumber === 5 ? 'SOCIAL DYNAMICS - Reveal leadership style and how they handle people' : ''}
 
 REQUIREMENTS:
-- 15-25 words maximum
+- 15-25 words length range
 - Provocative and direct, not open-ended
 - Present genuine tension between two valid approaches
 - No obvious "right" answer
