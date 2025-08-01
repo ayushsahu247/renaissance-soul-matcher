@@ -49,3 +49,29 @@ export const saveAssessment = async (assessmentData: AssessmentData) => {
     throw error;
   }
 };
+
+export const getUserAssessment = async () => {
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      throw new Error('User must be authenticated to retrieve assessment');
+    }
+
+    const { data, error } = await supabase
+      .from('assessments')
+      .select('*')
+      .eq('user_id', user.id)
+      .single();
+
+    if (error && error.code !== 'PGRST116') { // PGRST116 is "not found" error
+      console.error('Error retrieving assessment:', error);
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Failed to retrieve assessment:', error);
+    throw error;
+  }
+};
