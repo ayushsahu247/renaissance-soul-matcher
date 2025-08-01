@@ -113,11 +113,54 @@ Only return the JSON, no other text.`;
       throw new Error("No response from Gemini API");
     }
 
-    const startIndex = text.indexOf('{');
-    const endIndex = text.lastIndexOf('}');
-    const jsonString = text.substring(startIndex, endIndex + 1);
-
-    const questionData = JSON.parse(jsonString);
+    // Clean and extract JSON
+    let questionData;
+    try {
+      // Look for JSON in the response
+      const startIndex = text.indexOf('{');
+      const endIndex = text.lastIndexOf('}');
+      
+      if (startIndex === -1 || endIndex === -1) {
+        throw new Error("No JSON found in response");
+      }
+      
+      let jsonString = text.substring(startIndex, endIndex + 1);
+      
+      // Clean common JSON issues
+      jsonString = jsonString
+        .replace(/[\u0000-\u001F\u007F-\u009F]/g, "") // Remove control characters
+        .replace(/,\s*}/g, "}") // Remove trailing commas before }
+        .replace(/,\s*]/g, "]") // Remove trailing commas before ]
+        .trim();
+      
+      questionData = JSON.parse(jsonString);
+      
+      // Validate required fields
+      if (!questionData.question) {
+        throw new Error("Missing question field");
+      }
+      
+      // Ensure options array exists
+      if (!questionData.options || !Array.isArray(questionData.options)) {
+        questionData.options = [];
+      }
+      
+      // Ensure placeholder exists
+      if (!questionData.placeholder) {
+        questionData.placeholder = "Select an option above or write your own response...";
+      }
+      
+    } catch (parseError) {
+      console.error("JSON parsing failed:", parseError);
+      console.error("Raw text:", text);
+      
+      // Fallback to simple question format
+      questionData = {
+        question: text.replace(/[{}]/g, '').trim() || "Tell me about a challenging situation you faced and how you handled it.",
+        options: [],
+        placeholder: "Share your thoughts and experiences..."
+      };
+    }
 
     return new Response(JSON.stringify(questionData), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -126,7 +169,9 @@ Only return the JSON, no other text.`;
   } catch (error) {
     console.error("Error generating question:", error);
     return new Response(JSON.stringify({ 
-      question: "Tell me about a challenging situation you faced and how you handled it."
+      question: "Tell me about a challenging situation you faced and how you handled it.",
+      options: [],
+      placeholder: "Share your thoughts and experiences..."
     }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
