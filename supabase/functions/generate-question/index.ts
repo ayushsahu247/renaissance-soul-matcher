@@ -48,7 +48,7 @@ Question 5: Relationships & Social Dynamics - Explore how they interact with oth
 
 QUESTION STRUCTURE:
 - Present the scenario/situation in 15-25 words
-- Provide 3 distinct response options (A, B, C) 
+- Provide 5 distinct response options (A, B, C, D, E)
 - Each option reveals different leadership archetypes
 - No obviously "right" or "wrong" answers
 - All options should be reasonable approaches
@@ -68,7 +68,9 @@ Format as JSON:
   "options": {
     "A": "First approach option",
     "B": "Second approach option", 
-    "C": "Third approach option"
+    "C": "Third approach option",
+    "D": "Fourth approach option",
+    "E": "Fifth approach option"
   },
   "placeholder": "Select your instinct..."
 }

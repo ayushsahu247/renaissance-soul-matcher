@@ -11,7 +11,7 @@ interface GuessScreenProps {
 }
 
 export const GuessScreen = ({ onComplete, onBack }: GuessScreenProps) => {
-  const [guesses, setGuesses] = useState<string[]>(["", "", "", "", ""]);
+  const [guesses, setGuesses] = useState<string[]>(["", "", ""]);
 
   const handleInputChange = (index: number, value: string) => {
     const newGuesses = [...guesses];
@@ -51,7 +51,7 @@ export const GuessScreen = ({ onComplete, onBack }: GuessScreenProps) => {
             </div>
             <p className="text-xl font-crimson text-muted-foreground max-w-xl mx-auto">
               Before we begin our thoughtful assessment, who do you believe embodies your spirit? 
-              Write up to five historical figures that resonate with your character.
+              Write up to three historical figures that resonate with your character.
             </p>
           </div>
 
@@ -65,10 +65,7 @@ export const GuessScreen = ({ onComplete, onBack }: GuessScreenProps) => {
                       htmlFor={`guess-${index}`} 
                       className="font-playfair font-medium text-foreground"
                     >
-                      {index === 0 ? "First guess" : 
-                       index === 1 ? "Second guess (optional)" : 
-                       index === 2 ? "Third guess (optional)" :
-                       index === 3 ? "Fourth guess (optional)" : "Fifth guess (optional)"}
+                      {index === 0 ? "First guess" : index === 1 ? "Second guess (optional)" : "Third guess (optional)"}
                     </Label>
                     <Input
                       id={`guess-${index}`}
