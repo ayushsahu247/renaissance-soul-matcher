@@ -10,6 +10,11 @@ interface AnalysisResult {
   character: string;
   matchPercentage: number;
   description: string;
+  shortDescription: string;
+  biography: string;
+  birthYear: number;
+  deathYear: number;
+  location: string;
   achievements: string[];
   traits: Array<{ title: string; description: string }>;
 }

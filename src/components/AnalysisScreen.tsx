@@ -6,6 +6,11 @@ interface AnalysisResult {
   character: string;
   matchPercentage: number;
   description: string;
+  shortDescription: string;
+  biography: string;
+  birthYear: number;
+  deathYear: number;
+  location: string;
   achievements: string[];
   traits: Array<{ title: string; description: string }>;
 }
@@ -75,8 +80,13 @@ export const AnalysisScreen = ({ responses, onComplete }: AnalysisScreenProps) =
             character: "Lorenzo de' Medici",
             matchPercentage: 88,
             description: "A natural leader with vision and diplomatic skills.",
+            shortDescription: "Renaissance Prince and Patron",
+            biography: "Lorenzo de' Medici, known as Lorenzo the Magnificent, was an Italian statesman and de facto ruler of the Florentine Republic during the Italian Renaissance. He was a patron of the arts and letters, and his court was a gathering place for Renaissance artists, philosophers, and writers. Lorenzo was a skilled diplomat who maintained the delicate balance of power between Italian city-states through negotiation rather than warfare. His patronage of artists like Michelangelo and Botticelli helped fuel the Renaissance cultural explosion. Lorenzo exemplified the Renaissance ideal of combining political acumen with cultural sophistication, using both to strengthen Florence's position in Italy.",
+            birthYear: 1449,
+            deathYear: 1492,
+            location: "Florence, Italy",
             achievements: [
-              "Patron of History arts and culture",
+              "Patron of Renaissance arts and culture",
               "Skilled diplomat and political strategist",
               "Economic innovator and banking pioneer"
             ],
