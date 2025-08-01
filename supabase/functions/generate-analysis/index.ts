@@ -31,33 +31,54 @@ serve(async (req) => {
 
     const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
-    const prompt = `Based on these personality assessment responses, match this person to a historical figure and provide analysis.
+    const prompt = `Based on these personality assessment responses, conduct a comprehensive psychological analysis to match this person with a historical figure.
 
 Responses: ${responses.join("; ")}
 
-Match to a WIDELY RECOGNIZED historical figure that most educated people would know - someone taught in world history classes with widespread cultural recognition. Focus on "household names" of history across all cultures and time periods.
+COMPREHENSIVE ANALYSIS PROCESS:
 
-EXAMPLES OF APPROPRIATE FIGURES: Napoleon Bonaparte, Cleopatra VII, Leonardo da Vinci, Albert Einstein, Winston Churchill, Genghis Khan, Alexander the Great, Julius Caesar, Gandhi, Joan of Arc, Benjamin Franklin, Marie Curie, Theodore Roosevelt, Elizabeth I, Confucius, Hannibal, Catherine the Great, Abraham Lincoln, Mozart, Shakespeare, etc.
-DO NOT BE BIASED TOWARDS JULIUS CAESAR.
-AVOID: Obscure regional figures, lesser-known nobles, niche personalities, random chieftains, or anyone people would need to Google to recognize.
+1. DECISION-MAKING PATTERNS:
+Analyze how they approach choices - Are they intuitive or calculated? Risk-taking or cautious? Do they seek input or decide independently?
 
-Analyze responses and match based on personality patterns, decision-making style, moral framework, leadership approach, and core motivations. Provide detailed analysis in JSON format:
+2. CORE VALUE SYSTEM:
+Identify their fundamental beliefs - Do they prioritize idealism or pragmatism? Justice or mercy? Individual rights or collective benefit?
+
+3. LEADERSHIP INSTINCTS:
+Determine their natural leadership style - Are they inspirational or systematic? Collaborative or authoritative? Do they embrace change or preserve tradition?
+
+4. RELATIONSHIP WITH POWER:
+Assess their power motivation - Do they seek power for service or achievement? Are they naturally ambitious or reluctant leaders? Do they operate transparently or strategically?
+
+5. ADVERSITY RESPONSE:
+Evaluate how they handle setbacks - Are they adaptive or persistent? Confrontational or diplomatic? Do they take accountability or blame external factors?
+
+Based on this psychological profile, match them to a WIDELY RECOGNIZED historical figure that shares these core personality patterns and decision-making frameworks.
+
+HISTORICAL FIGURES POOL: Napoleon Bonaparte, Cleopatra VII, Leonardo da Vinci, Albert Einstein, Winston Churchill, Genghis Khan, Alexander the Great, Julius Caesar, Mahatma Gandhi, Joan of Arc, Benjamin Franklin, Elizabeth I, Confucius, Abraham Lincoln, Theodore Roosevelt, Catherine the Great, Otto von Bismarck, Hannibal Barca, Wolfgang Mozart, William Shakespeare, Marie Curie, Marcus Aurelius, Nelson Mandela, etc.
+
+REQUIREMENTS:
+- Match based on deep psychological patterns, not superficial similarities
+- Choose figures known globally across cultures and education systems
+- Provide thorough analysis connecting their responses to historical behavior patterns
+- Avoid regional or lesser-known historical figures
+
+Return analysis in JSON format:
 
 {
-  "character": "Historical Figure Name",
-  "matchPercentage": 70-95,
-  "description": "2-3 sentence description of why they match this figure",
-  "shortDescription": "3-7 word concise description of the character's role/identity",
-  "biography": "3-4 paragraph biography about this historical figure, focusing on their character, leadership style, and what made them unique",
-  "birthYear": 100,
-  "deathYear": 200,
-  "location": "City, Country",
-  "achievements": ["3-4 key achievements of the historical figure"],
-  "traits": [
-    {"title": "Trait Name", "description": "How this trait manifests in both the person and historical figure"},
-    {"title": "Another Trait", "description": "Another matching trait"},
-    {"title": "Third Trait", "description": "Third matching trait"}
-  ]
+ "character": "Historical Figure Name",
+ "matchPercentage": 70-95,
+ "description": "2-3 sentences explaining the psychological and behavioral connections",
+ "shortDescription": "3-7 word concise character description",
+ "biography": "3-4 paragraph biography focusing on personality traits and leadership patterns that match the analysis",
+ "birthYear": 100,
+ "deathYear": 200,
+ "location": "City, Country",
+ "achievements": ["3-4 key historical achievements"],
+ "traits": [
+   {"title": "Primary Trait", "description": "How this psychological trait manifests in both the person and historical figure"},
+   {"title": "Secondary Trait", "description": "Another matching personality pattern"},
+   {"title": "Third Trait", "description": "Additional character similarity"}
+ ]
 }
 
 Only return the JSON, no other text.`;
