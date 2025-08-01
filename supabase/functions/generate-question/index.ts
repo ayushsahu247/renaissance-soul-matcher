@@ -39,39 +39,38 @@ serve(async (req) => {
 
 ${context}
 
-CRITICAL: Analyze the questions above and identify what topics, settings, and moral conflicts have already been used. Then deliberately create question ${questionNumber} of 7 that uses a COMPLETELY DIFFERENT scenario type.
+CRITICAL: Analyze previous questions and create question ${questionNumber} of 7 using a COMPLETELY DIFFERENT scenario.
 
-LEADERSHIP PHILOSOPHY TYPES (use one that matches your question number):
-Question 1: Pragmatic power vs moral idealism (Machiavellian ethics)
-Question 2: Cultural unity vs cultural diversity (Role of tradition/identity)
-Question 3: Religious/moral authority vs secular effectiveness (Faith vs pragmatism)  
-Question 4: Meritocracy vs loyalty-based systems (Napoleonic organizational principles)
-Question 5: Rapid systematic change vs organic evolution (Revolutionary vs gradual)
-Question 6: Centralized vision vs decentralized autonomy (Control vs freedom)
-Question 7: Personal honor vs strategic necessity (Individual integrity vs collective benefit)
+REVEAL THEIR INSTINCTS ABOUT (pick one not used yet):
+- Effective shortcuts vs "the right way" 
+- Keeping traditions vs embracing change
+- Rewarding loyalty vs rewarding talent
+- Unity through shared culture vs celebrating differences
+- Personal principles vs getting things done
+- Gradual improvement vs bold transformation
+- Trusting people vs systems and rules
 
-SCENARIO REQUIREMENTS:
-- Present situations involving cultural values, religious considerations, or strategic ethics
-- Reveal their instinct about: tradition vs progress, ends vs means, merit vs loyalty
-- Show whether they see culture/religion as tools for unity or sources of division
-- Test their comfort with morally ambiguous but effective strategies
-- Different setting/context than ALL previous questions
+MAKE IT CONVERSATIONAL:
+- Use everyday situations that reveal these deeper patterns
+- Sound like an interesting friend asking a thought-provoking question
+- Avoid heavy political/philosophical language
+- Make them curious about their own answer
 - 15-25 words maximum
+- End with "What's your move?" or "Your instinct?"
 
-AVOID OBVIOUS MORAL CHOICES:
-Create conflicts between legitimate philosophical approaches to power, culture, and ethics.
-
-EXPLICIT AVOIDANCE:
-Based on context, use completely different settings and character dynamics.
+AVOID:
+- Academic tone or serious policy language
+- Repeating any settings/scenarios from context above
+- Questions that sound like homework
 
 Format as JSON:
 {
-  "title": "Core Philosophy",
-  "question": "Cultural/ethical/strategic dilemma ending with 'Your approach?'",
-  "placeholder": "I believe..."
+  "title": "Simple Theme",
+  "question": "Light but revealing scenario that exposes deep patterns",
+  "placeholder": "I'd probably..."
 }
 
-Create scenarios that reveal deep philosophical differences about power, culture, and ethics.
+Keep it fun and conversational while revealing the same leadership DNA.
 
 Only return the JSON, no other text.`;
 
