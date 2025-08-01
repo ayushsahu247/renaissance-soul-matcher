@@ -16,28 +16,34 @@ export type Database = {
     Tables: {
       assessments: {
         Row: {
+          character_name: string | null
           created_at: string
           id: string
           questions: Json
           responses: Json
           result: Json
           updated_at: string
+          user_id: string | null
         }
         Insert: {
+          character_name?: string | null
           created_at?: string
           id?: string
           questions: Json
           responses: Json
           result: Json
           updated_at?: string
+          user_id?: string | null
         }
         Update: {
+          character_name?: string | null
           created_at?: string
           id?: string
           questions?: Json
           responses?: Json
           result?: Json
           updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }

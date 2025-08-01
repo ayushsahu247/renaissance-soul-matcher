@@ -19,12 +19,20 @@ interface AssessmentData {
 
 export const saveAssessment = async (assessmentData: AssessmentData) => {
   try {
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      throw new Error('User must be authenticated to save assessment');
+    }
+
     const { data, error } = await supabase
       .from('assessments')
-      .insert({
+      .upsert({
+        user_id: user.id,
         questions: assessmentData.questions,
         responses: assessmentData.responses,
-        result: assessmentData.result
+        result: assessmentData.result,
+        character_name: assessmentData.result.character
       })
       .select()
       .single();
