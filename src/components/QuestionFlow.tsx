@@ -175,7 +175,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
 
             {/* Response Options - Mobile Optimized */}
             {currentQ.options && currentQ.options.length > 0 && (
-              <div className="mb-2 flex-1 min-h-0">
+              <div className="mb-0">
                 <div className="space-y-2 h-full overflow-y-auto">
                   {currentQ.options.map((option, index) => (
                     <Card 
@@ -202,7 +202,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
             )}
 
             {/* Navigation - Right below options */}
-            <div className="flex-shrink-0 pt-1">
+            <div className="flex-shrink-0 mt-5">
               <div className="flex items-center justify-between">
                 <Button
                   onClick={handlePrevious}
