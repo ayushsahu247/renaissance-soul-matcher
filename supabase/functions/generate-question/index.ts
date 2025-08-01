@@ -39,44 +39,34 @@ serve(async (req) => {
 
 ${context}
 
-Generate question ${questionNumber} of 7. 
+Looking at the previous questions above, identify what topics, formats, and styles have already been covered. Then deliberately generate question ${questionNumber} of 7 that explores a COMPLETELY UNRELATED topic using a DIFFERENT format.
 
-MANDATORY: Pick a random number between 1-8, then use the corresponding question type:
-1. Casual scenario: Real-life situation (work, social, family)
-2. Value ranking: Choose between 3-4 competing priorities 
-3. Personal preference: Lifestyle, habits, or ideals
-4. Social opinion: Gentle take on controversial topics
-5. Either/or choice: Two valid but opposing approaches
-6. Natural reaction: "When X happens, you usually..."
-7. Legacy question: Impact or remembrance preferences
-8. Change attitude: Traditional vs innovative approaches
+ENSURE MAXIMUM DIVERSITY:
+- Different subject matter than any previous question
+- Different question structure/format  
+- Different conversation angle
+- Different personality dimension being tested
 
-VARIETY REQUIREMENTS:
-- Question ${questionNumber} cannot repeat any format from previous questions
-- Must use different sentence structure than previous questions
-- Cannot start with "If you could..." or "What would you..."
-- Must be under 30 words
-- No explanations required - just natural response
+QUESTION TYPES (choose something NOT used yet):
+- Personal preferences about lifestyle/habits
+- Opinions on society/human nature (gently framed)
+- Value choices between competing goods
+- Natural reactions to situations
+- Approaches to learning/growth
+- Relationship with money/possessions
+- Views on tradition vs change
+- What energizes or drains you
 
-CONVERSATION STYLE:
-- Sound like a curious friend asking over coffee
-- Avoid academic or test-like language
-- Make it easy to answer naturally
-- Touch meaningful topics without being heavy
+Keep it conversational, under 25 words, and easy to answer naturally.
 
-SENSITIVE TOPICS (if chosen):
-Frame naturally: "Do you think..." "What's your take on..." "How do you feel about..."
-
-After generating the question, add "PROMPT WORKING" to the end.
+Add "PROMPT WORKING" to the end.
 
 Format as JSON:
 {
   "title": "2-3 Word Title",
-  "question": "Conversational question", 
+  "question": "Diverse question + PROMPT WORKING",
   "placeholder": "Start typing..."
 }
-
-CRITICAL: Be creative and random. Avoid any similarity to previous questions.
 
 Only return the JSON, no other text.`;
 
