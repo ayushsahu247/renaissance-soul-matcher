@@ -39,35 +39,42 @@ serve(async (req) => {
 
 ${context}
 
-Generate question ${questionNumber} of 7. Create a COMPLETELY DIFFERENT type of scenario from any previous questions.
+Generate question ${questionNumber} of 7. Create a COMPLETELY DIFFERENT type of question from any previous ones.
 
-DIVERSE SCENARIO TYPES (pick ONE that hasn't been used):
-- Leadership crisis: Leading a team through unexpected disaster
-- Creative challenge: Balancing innovation with practical constraints
-- Resource allocation: Distributing limited resources among competing needs
-- Social conflict: Mediating between opposing groups with valid concerns
-- Personal sacrifice: Choosing between personal gain and greater good
-- Knowledge vs action: Having information others don't - when to act/speak
-- Legacy building: How to be remembered vs immediate impact
-- Change vs tradition: Reforming established systems people depend on
+DIVERSE QUESTION TYPES (pick ONE that hasn't been used):
+- Casual scenario: Everyday situation that reveals character
+- Value hierarchy: "What matters most to you between..." (no explanations needed)
+- Abstract preference: Personal ideals and lifestyle choices
+- Social observation: "What do you think about..." (controversial but gently framed)
+- Philosophical choice: Simple either/or with brief reasoning
+- Personal instinct: "Your natural reaction when..."
+- Legacy thinking: How you want to be remembered
+- Change perspective: Your approach to tradition vs innovation
 
-Create a realistic scenario that:
-- Tests core values, decision-making patterns, and natural instincts
-- Reveals leadership style, risk tolerance, and moral priorities
-- Shows whether they're driven by logic, emotion, duty, or personal conviction
-- Exposes their relationship with power, influence, and responsibility
-- Under 45 words total
-- Has NO obvious "correct" answer - requires revealing personal philosophy
-- Is completely different from previous questions in both topic and approach
+Create a question that:
+- Feels like a relaxed conversation over coffee
+- Tests core values and natural instincts
+- Reveals leadership style, moral priorities, and worldview
+- Shows their relationship with power, people, and principles
+- Under 35 words total
+- Sounds natural and conversational - avoid "explain your reasoning"
+- Touches on meaningful topics without being preachy or academic
+- Has NO obvious connection to specific historical figures
+- Is completely different from previous questions in style and content
+
+For sensitive topics (race, gender, politics), frame them naturally:
+- "Do you think men and women naturally excel at different things?"
+- "What's your honest take on whether all cultures are equally valuable?"
+- Keep it conversational, not confrontational
 
 Format as JSON:
 {
-  "title": "2-3 Word Title",
-  "question": "Engaging scenario that forces them to reveal their true nature and decision-making process",
-  "placeholder": "Brief response starter..."
+  "title": "2-3 Word Title", 
+  "question": "Natural, conversational question that reveals their character",
+  "placeholder": "Start typing..."
 }
 
-Make it thought-provoking and personal. Focus on revealing character essence, not just moral choices.
+Make it feel like an interesting person asking a thoughtful question, not a psychology test.
 
 Only return the JSON, no other text.`;
 
