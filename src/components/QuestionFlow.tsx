@@ -201,8 +201,8 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
               </div>
             )}
 
-            {/* Navigation - Bottom */}
-            <div className="flex-shrink-0 mt-auto pt-4">
+            {/* Navigation - Right below options */}
+            <div className="flex-shrink-0 pt-4">
               <div className="flex items-center justify-between">
                 <Button
                   onClick={handlePrevious}
