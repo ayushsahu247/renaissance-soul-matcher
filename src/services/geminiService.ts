@@ -3,12 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 export async function generateNextQuestion(
   questionNumber: number,
   previousResponses: string[]
-): Promise<{
-  title: string;
-  question: string;
-  options: { A: string; B: string; C: string };
-  placeholder: string;
-}> {
+): Promise<string> {
   try {
     const { data, error } = await supabase.functions.invoke('generate-question', {
       body: { questionNumber, previousResponses }
@@ -19,20 +14,11 @@ export async function generateNextQuestion(
       throw error;
     }
 
-    return data;
+    return data.question;
   } catch (error) {
     console.error("Error generating question:", error);
     // Fallback question
-    return {
-      title: "Personal Challenge",
-      question: "Tell me about a challenging situation you faced and how you handled it.",
-      options: {
-        A: "Analyzed the situation logically and created a step-by-step plan",
-        B: "Trusted my instincts and acted decisively based on my values", 
-        C: "Sought advice from others and built consensus before proceeding"
-      },
-      placeholder: "Select your approach..."
-    };
+    return "Tell me about a challenging situation you faced and how you handled it.";
   }
 }
 
