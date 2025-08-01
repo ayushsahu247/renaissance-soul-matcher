@@ -59,8 +59,6 @@ QUESTION TYPES (choose something NOT used yet):
 
 Keep it conversational, under 25 words, and easy to answer naturally.
 
-Add "PROMPT WORKING" to the end.
-
 Format as JSON:
 {
   "title": "2-3 Word Title",
