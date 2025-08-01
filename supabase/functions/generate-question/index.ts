@@ -39,37 +39,38 @@ serve(async (req) => {
 
 ${context}
 
-Looking at the previous questions above, identify what topics, formats, and styles have already been covered. Then deliberately generate question ${questionNumber} of 7 that explores a COMPLETELY UNRELATED topic using a DIFFERENT format.
+Analyze the previous questions to avoid repetition. Generate question ${questionNumber} of 7 that presents a MORAL DILEMMA or VALUE CONFLICT that forces them to reveal their true nature.
 
-ENSURE MAXIMUM DIVERSITY:
-- Different subject matter than any previous question
-- Different question structure/format  
-- Different conversation angle
-- Different personality dimension being tested
+CREATE A DILEMMA THAT EXPOSES:
+- Core values when they conflict with each other
+- How they handle competing loyalties  
+- Their instinctive moral compass under pressure
+- What they're willing to sacrifice for what they believe in
+- Their biases about power, fairness, loyalty, truth
+- Whether they prioritize individuals vs groups
+- How they balance pragmatism vs principles
 
-QUESTION TYPES (choose something NOT used yet):
-- Personal preferences about lifestyle/habits
-- Opinions on society/human nature (gently framed)
-- Value choices between competing goods
-- Natural reactions to situations
-- Approaches to learning/growth
-- Relationship with money/possessions
-- Views on tradition vs change
-- What energizes or drains you
+DILEMMA TYPES (pick one that hasn't been used):
+- Loyalty vs justice: Choose between protecting someone you care about vs doing what's right
+- Security vs freedom: Safety for many vs liberty for individuals  
+- Truth vs harmony: Speaking up vs keeping peace
+- Personal gain vs greater good: Success for you vs benefit for others
+- Tradition vs progress: Preserving what works vs embracing change
+- Mercy vs justice: Forgiveness vs consequences
+- Individual vs collective: Personal rights vs community needs
 
-TONE: Make it slightly provocative but chill - like a friend challenging you to think, not just asking for information. Use phrases that nudge them toward a stance:
-- "Do you think..." 
-- "What's your honest take on..."
-- "Which bugs you more..."
-- "Are you the type who..."
-
-Keep it conversational, under 25 words. Make them want to defend or explain their position.
+FORMAT: Present a realistic scenario where they must choose between two compelling but conflicting values. Make it:
+- Specific and relatable (not abstract)
+- No clear "right" answer
+- Forces them to prioritize what matters most
+- Under 30 words
+- Ends with "What do you do?" or "What's your instinct?"
 
 Format as JSON:
 {
-  "title": "2-3 Word Title",
-  "question": "Slightly provocative but friendly question",
-  "placeholder": "Start typing..."
+  "title": "2-3 Word Dilemma Type",
+  "question": "Realistic moral dilemma that forces a revealing choice",
+  "placeholder": "I would..."
 }
 
 Only return the JSON, no other text.`;
