@@ -35,17 +35,23 @@ serve(async (req) => {
       ? `Previous responses: ${previousResponses.join("; ")}`
       : "This is the first question.";
 
-    const prompt = `You are conducting a personality assessment to match someone with a historical figure.
+    const prompt = `As a historian and clinical psychologist aged 25 years, You are conducting a personality assessment to match someone with a historical figure.
 
-Generate question ${questionNumber} of 5.
+Generate question ${questionNumber} of 9.
+
 QUESTION TYPE:
-${questionNumber === 1 ? 'LIFE PHILOSOPHY - Reveal worldview (beauty vs utility, knowledge vs action, etc.)' : ''}
-${questionNumber === 2 ? 'CREATIVE APPROACH - Show how they build/create (systematic vs inspired, solo vs collaborative, etc.)' : ''}  
-${questionNumber === 3 ? 'PERSONAL FULFILLMENT - What drives satisfaction (achievement vs harmony, recognition vs impact, etc.)' : ''}
-${questionNumber === 4 ? 'PROBLEM SOLVING - Approach to challenges (analytical vs intuitive, patient vs urgent, etc.)' : ''}
-${questionNumber === 5 ? 'HUMAN CONNECTION - How they relate to others (inspire vs serve, lead vs follow, etc.)' : ''}
+${questionNumber === 1 ? 'LIFE PHILOSOPHY - Reveal worldview (beauty vs utility, knowledge vs action, idealism vs realism, etc.)' : ''}
+${questionNumber === 2 ? 'CREATIVE APPROACH - Show how they build/create (systematic vs inspired, solo vs collaborative, perfection vs iteration, etc.)' : ''}
+${questionNumber === 3 ? 'PERSONAL FULFILLMENT - What drives satisfaction (achievement vs harmony, recognition vs impact, legacy vs present, etc.)' : ''}
+${questionNumber === 4 ? 'PROBLEM SOLVING - Approach to challenges (analytical vs intuitive, patient vs urgent, direct vs indirect, etc.)' : ''}
+${questionNumber === 5 ? 'HUMAN CONNECTION - How they relate to others (inspire vs serve, lead vs follow, trust vs verify, etc.)' : ''}
+${questionNumber === 6 ? 'MORAL FRAMEWORK - Ethical decision-making (justice vs mercy, truth vs harmony, individual vs collective, etc.)' : ''}
+${questionNumber === 7 ? 'RELATIONSHIP WITH POWER - Authority orientation (seek power vs influence, centralize vs delegate, command vs persuade, etc.)' : ''}
+${questionNumber === 8 ? 'RISK & CHANGE TOLERANCE - Innovation approach (revolutionary vs evolutionary, disrupt vs preserve, bold vs cautious, etc.)' : ''}
+${questionNumber === 9 ? 'HANDLING ADVERSITY - Response to setbacks (fight vs adapt, persist vs pivot, blame vs accountability, etc.)' : ''}
+
 REQUIREMENTS:
-- 15-25 words length range
+- 15-25 words maximum
 - Provocative and direct, not open-ended
 - Present genuine tension between two valid approaches
 - No obvious "right" answer
@@ -55,7 +61,7 @@ TONE: Make them choose a side and reveal their true nature.
 
 Format as JSON:
 {
-  "title": "Theme",
+  "title": "Core Dimension",
   "question": "Direct provocative question",
   "placeholder": "Your honest take..."
 }

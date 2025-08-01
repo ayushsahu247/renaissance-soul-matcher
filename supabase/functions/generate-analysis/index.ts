@@ -62,6 +62,9 @@ REQUIREMENTS:
 - Provide thorough analysis connecting their responses to historical behavior patterns
 - Avoid regional or lesser-known historical figures
 
+
+Do not default to Otto von Bismarck unless the responses specifically indicate 19th-century German political patterns.
+
 Return analysis in JSON format:
 
 {
