@@ -39,11 +39,15 @@ const Index = () => {
   const handleAnalysisComplete = async (result: AnalysisResult) => {
     setAnalysisResult(result);
     
-    // Save the quiz result to the database
-    try {
-      await saveQuizResult(questions, responses, result.character);
-    } catch (error) {
-      console.error('Failed to save quiz result:', error);
+    // Save the quiz result to the database only if not already saved
+    if (currentState === "analysis") {
+      try {
+        console.log('Saving quiz result to database...');
+        await saveQuizResult(questions, responses, result.character);
+        console.log('Quiz result saved successfully');
+      } catch (error) {
+        console.error('Failed to save quiz result:', error);
+      }
     }
     
     setCurrentState("results");
