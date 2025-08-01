@@ -39,27 +39,59 @@ serve(async (req) => {
 
 Generate question ${questionNumber} of 5.
 
-MANDATORY CATEGORY ROTATION (use the category that matches your question number):
-Question 1: Hypothetical Scenarios & Ethical Dilemmas - Present a high-stakes situation with 3 distinct approaches
-Question 2: Inner Desires & Motivations - Reveal what they truly want from life or how they spend personal time
-Question 3: Personal Values & Beliefs - Uncover core principles when values conflict
-Question 4: Reactions to Adversity & Failure - Test resilience and how they handle setbacks
-Question 5: Relationships & Social Dynamics - Explore how they interact with others and build teams
+CATEGORY FOR THIS QUESTION (use creative variety within the theme):
+${questionNumber === 1 ? `ETHICAL DILEMMAS & MORAL CHOICES - Create scenarios involving:
+• Leadership crises requiring difficult decisions
+• Resource allocation under scarcity
+• Competing loyalties or conflicting duties
+• Justice vs mercy situations
+• Individual rights vs collective good
+• Power and corruption temptations
+• Truth vs diplomacy dilemmas` : ''}${questionNumber === 2 ? `INNER DRIVES & LIFE PHILOSOPHY - Explore topics like:
+• What motivates them in challenging times
+• Their relationship with power, fame, or legacy
+• How they define success and fulfillment
+• Their approach to work-life balance
+• What they do when no one is watching
+• Their deepest fears or greatest aspirations
+• How they want to be remembered` : ''}${questionNumber === 3 ? `CORE VALUES & BELIEF SYSTEMS - Investigate areas such as:
+• Tradition vs innovation conflicts
+• Individual freedom vs social order
+• Idealism vs pragmatism in action
+• Faith/spirituality vs rational thinking
+• Loyalty vs honesty when they conflict
+• Equality vs merit-based systems
+• Risk vs security orientations` : ''}${questionNumber === 4 ? `ADVERSITY & RESILIENCE PATTERNS - Focus on scenarios like:
+• Major failures or public embarrassments
+• Betrayal by trusted allies or friends
+• Financial ruin or loss of status
+• Health crises or physical limitations
+• Unexpected opposition or criticism
+• Being misunderstood or isolated
+• Having to start over from scratch` : ''}${questionNumber === 5 ? `SOCIAL DYNAMICS & LEADERSHIP STYLE - Consider situations involving:
+• Building consensus among disagreeing parties
+• Dealing with incompetent but loyal followers
+• Managing talented but difficult personalities
+• Choosing between popular and right decisions
+• Handling competition and rivalry
+• Inspiring others during dark times
+• Balancing transparency with strategy` : ''}
 
-QUESTION STRUCTURE:
-- Present the scenario/situation in 15-25 words
-- Provide 3 distinct response options (A, B, C) 
-- Each option reveals different leadership archetypes
-- No obviously "right" or "wrong" answers
-- All options should be reasonable approaches
+CREATIVE GUIDELINES:
+- Vary the setting: historical, modern, hypothetical, personal, professional
+- Mix question formats: scenarios, preferences, reactions, choices
+- Include emotional and intellectual challenges
+- Range from intimate personal moments to grand public decisions
+- Draw inspiration from real historical situations but make them relatable
+- Ensure each option reflects distinctly different personality archetypes
 
 REVEAL DIFFERENT PATTERNS:
-- Decision-making under pressure vs careful planning
-- Individual action vs collaborative approaches  
-- Pragmatic vs idealistic worldviews
-- Short-term crisis management vs long-term vision
-- Mercy vs justice orientations
-- Risk-taking vs cautious approaches
+- Intuitive vs analytical decision-making
+- Collaborative vs independent approaches  
+- Idealistic vs pragmatic worldviews
+- Immediate action vs strategic patience
+- Compassionate vs firm leadership styles
+- Innovation vs tradition preferences
 
 Format as JSON:
 {
