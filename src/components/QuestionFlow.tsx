@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { generateNextQuestion } from "@/services/geminiService";
 
@@ -10,6 +11,11 @@ interface Question {
   id: number;
   title: string;
   question: string;
+  options: {
+    A: string;
+    B: string;
+    C: string;
+  };
   placeholder: string;
 }
 
@@ -24,10 +30,10 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
   const [currentQ, setCurrentQ] = useState<Question | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   
-  const totalQuestions = 7;
+  const totalQuestions = 5;
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
   const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
-  const canProceed = responses[currentQuestionIndex]?.trim().length > 10;
+  const canProceed = responses[currentQuestionIndex]?.length > 0;
 
   useEffect(() => {
     loadQuestion();
@@ -36,16 +42,17 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
   const loadQuestion = async () => {
     setIsLoading(true);
     try {
-      const questionText = await generateNextQuestion(
+      const questionData = await generateNextQuestion(
         currentQuestionIndex + 1,
         responses.slice(0, currentQuestionIndex)
       );
       
       setCurrentQ({
         id: currentQuestionIndex + 1,
-        title: `Question ${currentQuestionIndex + 1}`,
-        question: questionText,
-        placeholder: "Share your thoughts and experiences..."
+        title: questionData.title || `Question ${currentQuestionIndex + 1}`,
+        question: questionData.question,
+        options: questionData.options || { A: "Option A", B: "Option B", C: "Option C" },
+        placeholder: questionData.placeholder || "Select your instinct..."
       });
     } catch (error) {
       console.error("Error loading question:", error);
@@ -53,7 +60,8 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
         id: currentQuestionIndex + 1,
         title: `Question ${currentQuestionIndex + 1}`,
         question: "Tell me about yourself and what drives you.",
-        placeholder: "Share your thoughts and experiences..."
+        options: { A: "I focus on my goals", B: "I help others succeed", C: "I seek new experiences" },
+        placeholder: "Select your instinct..."
       });
     } finally {
       setIsLoading(false);
@@ -128,14 +136,23 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
 
             {/* Response Area */}
             <div className="mb-6">
-              <Textarea
+              <RadioGroup
                 value={responses[currentQuestionIndex] || ""}
-                onChange={(e) => handleResponseChange(e.target.value)}
-                placeholder={currentQ.placeholder}
-                className="min-h-[150px] font-crimson text-base resize-none border-muted focus:border-History-gold"
-              />
-              <p className="text-xs text-muted-foreground mt-2 font-crimson">
-                Please write at least a few sentences to continue.
+                onValueChange={handleResponseChange}
+                className="space-y-4"
+              >
+                {Object.entries(currentQ.options).map(([key, option]) => (
+                  <div key={key} className="flex items-start space-x-3 p-4 rounded-lg border border-muted hover:border-History-gold transition-colors">
+                    <RadioGroupItem value={key} id={key} className="mt-1" />
+                    <Label htmlFor={key} className="flex-1 font-crimson text-base cursor-pointer leading-relaxed">
+                      <span className="font-semibold text-History-gold mr-2">{key}.</span>
+                      {option}
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+              <p className="text-xs text-muted-foreground mt-4 font-crimson">
+                {currentQ.placeholder}
               </p>
             </div>
 
