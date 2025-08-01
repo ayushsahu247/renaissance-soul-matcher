@@ -147,7 +147,7 @@ export const AnalysisScreen = ({ responses, onComplete }: AnalysisScreenProps) =
 
         {/* Subtitle */}
         <p className="text-sm font-crimson text-muted-foreground/70 mt-8">
-          Matching you with historical figures from the Italian History...
+          Matching you with your spirit-historical character...
         </p>
       </div>
     </div>
