@@ -10,6 +10,7 @@ interface Question {
   id: number;
   title: string;
   question: string;
+  options: { A: string; B: string; C: string };
   placeholder: string;
 }
 
@@ -20,7 +21,7 @@ interface QuestionFlowProps {
 
 export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [questions, setQuestions] = useState<string[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [responses, setResponses] = useState<string[]>([]);
   const [currentQ, setCurrentQ] = useState<Question | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +29,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
   const totalQuestions = 5;
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
   const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
-  const canProceed = responses[currentQuestionIndex]?.trim().length > 10;
+  const canProceed = responses[currentQuestionIndex]?.trim().length > 0;
 
   useEffect(() => {
     loadQuestion();
@@ -37,37 +38,40 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
   const loadQuestion = async () => {
     setIsLoading(true);
     try {
-      const questionText = await generateNextQuestion(
+      const questionData = await generateNextQuestion(
         currentQuestionIndex + 1,
         responses.slice(0, currentQuestionIndex)
       );
       
-      // Store the question text
+      // Store the question data with ID
       const newQuestions = [...questions];
-      newQuestions[currentQuestionIndex] = questionText;
+      newQuestions[currentQuestionIndex] = {
+        ...questionData,
+        id: currentQuestionIndex + 1
+      };
       setQuestions(newQuestions);
       
-      setCurrentQ({
-        id: currentQuestionIndex + 1,
-        title: `Question ${currentQuestionIndex + 1}`,
-        question: questionText,
-        placeholder: "Share your thoughts and experiences..."
-      });
+      setCurrentQ(newQuestions[currentQuestionIndex]);
     } catch (error) {
       console.error("Error loading question:", error);
-      const fallbackQuestion = "Tell me about yourself and what drives you.";
+      const fallbackQuestion = {
+        id: currentQuestionIndex + 1,
+        title: "Personal Reflection",
+        question: "Tell me about yourself and what drives you.",
+        options: {
+          A: "I am driven by personal achievement and recognition",
+          B: "I am motivated by helping others and making a difference", 
+          C: "I seek knowledge, understanding, and personal growth"
+        },
+        placeholder: "Share your thoughts and experiences..."
+      };
       
       // Store the fallback question
       const newQuestions = [...questions];
       newQuestions[currentQuestionIndex] = fallbackQuestion;
       setQuestions(newQuestions);
       
-      setCurrentQ({
-        id: currentQuestionIndex + 1,
-        title: `Question ${currentQuestionIndex + 1}`,
-        question: fallbackQuestion,
-        placeholder: "Share your thoughts and experiences..."
-      });
+      setCurrentQ(fallbackQuestion);
     } finally {
       setIsLoading(false);
     }
@@ -84,7 +88,7 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       const filteredResponses = responses.filter(response => response.trim() !== "");
-      const correspondingQuestions = questions.slice(0, filteredResponses.length);
+      const correspondingQuestions = questions.slice(0, filteredResponses.length).map(q => q.question);
       onComplete(correspondingQuestions, filteredResponses);
     }
   };
@@ -141,17 +145,22 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
               </h2>
             </div>
 
-            {/* Response Area */}
-            <div className="mb-6">
-              <Textarea
-                value={responses[currentQuestionIndex] || ""}
-                onChange={(e) => handleResponseChange(e.target.value)}
-                placeholder={currentQ.placeholder}
-                className="min-h-[150px] font-crimson text-base resize-none border-muted focus:border-History-gold"
-              />
-              <p className="text-xs text-muted-foreground mt-2 font-crimson">
-                Please write at least a few sentences to continue.
-              </p>
+            {/* Response Options */}
+            <div className="mb-6 space-y-3">
+              {Object.entries(currentQ.options).map(([key, option]) => (
+                <button
+                  key={key}
+                  onClick={() => handleResponseChange(option)}
+                  className={`w-full text-left p-4 rounded-lg border transition-all font-crimson ${
+                    responses[currentQuestionIndex] === option
+                      ? 'border-History-gold bg-History-gold/10 text-foreground'
+                      : 'border-muted hover:border-History-gold/50 bg-card'
+                  }`}
+                >
+                  <span className="font-semibold text-History-gold mr-3">{key}.</span>
+                  {option}
+                </button>
+              ))}
             </div>
 
             {/* Navigation */}
