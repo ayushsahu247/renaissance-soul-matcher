@@ -47,6 +47,27 @@ export type Database = {
         }
         Relationships: []
       }
+      results: {
+        Row: {
+          character_result: string
+          created_at: string
+          id: number
+          questions_and_responses: Json
+        }
+        Insert: {
+          character_result: string
+          created_at?: string
+          id?: number
+          questions_and_responses: Json
+        }
+        Update: {
+          character_result?: string
+          created_at?: string
+          id?: number
+          questions_and_responses?: Json
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

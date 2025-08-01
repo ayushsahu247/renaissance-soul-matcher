@@ -3,7 +3,7 @@ import { LandingPage } from "@/components/LandingPage";
 import { QuestionFlow } from "@/components/QuestionFlow";
 import { AnalysisScreen } from "@/components/AnalysisScreen";
 import { ResultsPage } from "@/components/ResultsPage";
-import { saveAssessment } from "@/services/assessmentService";
+import { saveQuizResult } from "@/services/resultsService";
 
 type AppState = "landing" | "questions" | "analysis" | "results";
 
@@ -39,15 +39,11 @@ const Index = () => {
   const handleAnalysisComplete = async (result: AnalysisResult) => {
     setAnalysisResult(result);
     
-    // Save the complete assessment to the database
+    // Save the quiz result to the database
     try {
-      await saveAssessment({
-        questions,
-        responses,
-        result
-      });
+      await saveQuizResult(questions, responses, result.character);
     } catch (error) {
-      console.error('Failed to save assessment:', error);
+      console.error('Failed to save quiz result:', error);
     }
     
     setCurrentState("results");
