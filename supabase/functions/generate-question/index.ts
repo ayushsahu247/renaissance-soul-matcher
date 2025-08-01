@@ -37,66 +37,60 @@ serve(async (req) => {
 
     const prompt = `You are conducting a personality assessment to match someone with a historical figure.
 
-Generate question ${questionNumber} of 5 as an open-ended, subjective question that encourages detailed personal reflection.
+Generate question ${questionNumber} of 5 as a focused, provocative question that reveals core beliefs and instincts.
 
-CATEGORY FOR THIS QUESTION (use creative variety within the theme):
-${questionNumber === 1 ? `ETHICAL DILEMMAS & MORAL CHOICES - Create reflective prompts about:
-• How they handle difficult moral decisions
-• Their approach to competing loyalties or duties
-• Personal experiences with justice vs mercy
-• Times they've faced ethical temptations
-• Balancing individual rights vs collective good
-• How they navigate truth vs diplomacy` : ''}${questionNumber === 2 ? `INNER DRIVES & LIFE PHILOSOPHY - Explore personal topics like:
-• What truly motivates them during challenges
-• Their relationship with power, recognition, or legacy
-• How they personally define success and fulfillment
-• Their approach to balance in life
-• Personal values when no one is watching
-• Their deepest fears or greatest aspirations` : ''}${questionNumber === 3 ? `CORE VALUES & BELIEF SYSTEMS - Investigate personal beliefs about:
-• Their stance on tradition vs innovation
-• Personal views on freedom vs order
-• How they balance idealism with pragmatism
-• Their spiritual or philosophical foundation
-• Personal conflicts between loyalty and honesty
-• Their views on fairness and merit` : ''}${questionNumber === 4 ? `ADVERSITY & RESILIENCE PATTERNS - Focus on personal experiences with:
-• How they've handled major failures or setbacks
-• Times they've faced betrayal or disappointment
-• Personal experiences with loss of status or resources
-• How they cope with criticism or opposition
-• Times they've felt misunderstood or isolated
-• Experiences starting over or rebuilding` : ''}${questionNumber === 5 ? `SOCIAL DYNAMICS & LEADERSHIP STYLE - Explore their approach to:
-• How they build consensus in difficult situations
-• Their style of managing difficult personalities
-• Times they've chosen principles over popularity
-• How they handle competition or rivalry
-• Their approach to inspiring others during hardship
-• Balancing openness with strategic thinking` : ''}
+CATEGORY FOR THIS QUESTION:
+${questionNumber === 1 ? `ETHICAL DILEMMAS & MORAL CHOICES - Create pointed questions about moral instincts:
+- Tough choices between competing loyalties
+- When ends justify means vs when they don't
+- Justice vs mercy in real situations
+- Truth vs diplomacy trade-offs
+- Individual rights vs collective good tensions` : ''}${questionNumber === 2 ? `INNER DRIVES & LIFE PHILOSOPHY - Probe what really motivates them:
+- What they're willing to sacrifice for success
+- How they handle power and recognition
+- What drives them when things get tough
+- Their honest relationship with ambition
+- What they fear most about failure` : ''}${questionNumber === 3 ? `CORE VALUES & BELIEF SYSTEMS - Challenge their fundamental beliefs:
+- Tradition vs innovation tensions
+- Freedom vs order trade-offs
+- Idealism vs pragmatism conflicts
+- Merit vs loyalty decisions
+- Fairness vs effectiveness choices` : ''}${questionNumber === 4 ? `ADVERSITY & RESILIENCE PATTERNS - Test their response to setbacks:
+- How they handle betrayal or disappointment
+- Their instinct when facing major failure
+- Response to criticism and opposition
+- What they do when isolated or misunderstood
+- How they rebuild after losing everything` : ''}${questionNumber === 5 ? `SOCIAL DYNAMICS & LEADERSHIP STYLE - Reveal their social instincts:
+- How they handle difficult personalities
+- When they choose principles over popularity
+- Their approach to competition and rivalry
+- How they inspire others during crisis
+- Balance between openness and strategy` : ''}
 
-QUESTION GUIDELINES:
-- Create thoughtful, reflective prompts that encourage storytelling
-- Ask about personal experiences, beliefs, or approaches
-- Frame scenarios that allow for nuanced, detailed responses
-- Encourage examples from their own life or hypothetical situations
-- Make questions that reveal personality patterns and values
-- Use engaging, conversational language
-- Questions should be 20-40 words
+QUESTION STYLE:
+- Make them take a stance or reveal their instincts
+- Present scenarios with tension or conflict
+- Ask "What's your honest take on..." or "How do you really handle..."
+- Force them to choose between two valid but competing approaches
+- Make it slightly uncomfortable - probe their real beliefs
+- 15-30 words maximum
+- End with "Your move?" or "What's your instinct?" or "Your honest take?"
 
-QUESTION FORMATS TO VARY:
-- "Describe a time when..."
-- "How do you typically handle..."
-- "What's your approach to..."
-- "Tell me about your experience with..."
-- "When faced with [scenario], how do you..."
-- "What drives you when..."
+PROVOCATIVE FORMATS:
+- "What's your real opinion on..."
+- "When push comes to shove, do you..."
+- "Be honest - how do you actually handle..."
+- "What's your gut reaction when..."
+- "Which bothers you more..."
 
 Format as JSON:
 {
-  "title": "Question Category",
-  "question": "Open-ended reflective question that encourages detailed personal response",
-  "placeholder": "Share your thoughts, experiences, and perspective..."
+  "title": "Core Theme",
+  "question": "Provocative question that forces them to reveal their true nature",
+  "placeholder": "Your honest response..."
 }
 
-Create questions that differentiate between historical leadership styles and personality types through personal reflection.
+Make them think "Damn, that's a good question" and reveal something real about themselves.
 
 Only return the JSON, no other text.`;
 
