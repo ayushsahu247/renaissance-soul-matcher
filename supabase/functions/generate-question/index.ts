@@ -52,7 +52,7 @@ ${questionNumber === 9 ? 'HANDLING ADVERSITY - Response to setbacks (fight vs ad
 
 REQUIREMENTS:
 - 15-25 words maximum
-- Provocative and direct, not open-ended
+- Provocative and direct, slightly open-ended
 - Present genuine tension between two valid approaches
 - No obvious "right" answer
 - End with "Your move?" or "Your instinct?" or "Your take?"
