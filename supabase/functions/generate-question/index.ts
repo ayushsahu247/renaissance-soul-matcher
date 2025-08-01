@@ -67,6 +67,8 @@ For sensitive topics (race, gender, politics), frame them naturally:
 - "What's your honest take on whether all cultures are equally valuable?"
 - Keep it conversational, not confrontational
 
+Append a "Prompt working" at the end of every question.
+
 Format as JSON:
 {
   "title": "2-3 Word Title", 
