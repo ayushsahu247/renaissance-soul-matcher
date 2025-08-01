@@ -89,6 +89,13 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
     }
   };
 
+  const handleSkip = () => {
+    handleResponseChange("No clue");
+    setTimeout(() => {
+      handleNext();
+    }, 0);
+  };
+
   const handlePrevious = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
@@ -152,6 +159,17 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
               <p className="text-xs text-muted-foreground mt-2 font-crimson">
                 Please write at least a few sentences to continue.
               </p>
+            </div>
+
+            {/* Skip Button */}
+            <div className="flex justify-center mb-4">
+              <Button
+                onClick={handleSkip}
+                variant="ghost"
+                className="font-crimson text-muted-foreground hover:text-foreground"
+              >
+                No clue, skip
+              </Button>
             </div>
 
             {/* Navigation */}
