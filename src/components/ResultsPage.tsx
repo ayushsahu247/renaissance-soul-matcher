@@ -22,10 +22,11 @@ interface AnalysisResult {
 
 interface ResultsPageProps {
   analysisResult: AnalysisResult | null;
+  userGuesses?: string[];
   onRestart: () => void;
 }
 
-export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => {
+export const ResultsPage = ({ analysisResult, userGuesses, onRestart }: ResultsPageProps) => {
   const { toast } = useToast();
   const [characterImage, setCharacterImage] = useState<WikipediaImageData | null>(null);
   const [imageLoading, setImageLoading] = useState(true);
@@ -153,6 +154,13 @@ Take the assessment yourself: ${window.location.origin}`;
           <Badge variant="secondary" className="mb-4 font-playfair">
             Your Historical Match
           </Badge>
+          {userGuesses?.includes(result.character) && (
+            <div className="mb-4">
+              <Badge variant="outline" className="bg-History-gold/20 border-History-gold text-History-brown font-playfair">
+                ✨ Remarkable self-awareness
+              </Badge>
+            </div>
+          )}
           <h1 className="text-4xl md:text-5xl font-playfair font-bold text-foreground mb-2">
             {result.character}
           </h1>

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { LandingPage } from "@/components/LandingPage";
+import { GuessScreen } from "@/components/GuessScreen";
 import { QuestionFlow } from "@/components/QuestionFlow";
 import { AnalysisScreen } from "@/components/AnalysisScreen";
 import { ResultsPage } from "@/components/ResultsPage";
 
-type AppState = "landing" | "questions" | "analysis" | "results";
+type AppState = "landing" | "guess" | "questions" | "analysis" | "results";
 
 interface AnalysisResult {
   character: string;
@@ -21,11 +22,21 @@ interface AnalysisResult {
 
 const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>("landing");
+  const [userGuesses, setUserGuesses] = useState<string[]>([]);
   const [responses, setResponses] = useState<string[]>([]);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
 
   const handleStart = () => {
+    setCurrentState("guess");
+  };
+
+  const handleGuessComplete = (guesses: string[]) => {
+    setUserGuesses(guesses);
     setCurrentState("questions");
+  };
+
+  const handleBackToGuess = () => {
+    setCurrentState("guess");
   };
 
   const handleQuestionsComplete = (userResponses: string[]) => {
@@ -40,6 +51,7 @@ const Index = () => {
 
   const handleRestart = () => {
     setCurrentState("landing");
+    setUserGuesses([]);
     setResponses([]);
     setAnalysisResult(null);
   };
@@ -51,17 +63,24 @@ const Index = () => {
   switch (currentState) {
     case "landing":
       return <LandingPage onStart={handleStart} />;
+    case "guess":
+      return (
+        <GuessScreen 
+          onComplete={handleGuessComplete}
+          onBack={handleBackToLanding}
+        />
+      );
     case "questions":
       return (
         <QuestionFlow 
           onComplete={handleQuestionsComplete}
-          onBack={handleBackToLanding}
+          onBack={handleBackToGuess}
         />
       );
     case "analysis":
       return <AnalysisScreen responses={responses} onComplete={handleAnalysisComplete} />;
     case "results":
-      return <ResultsPage analysisResult={analysisResult} onRestart={handleRestart} />;
+      return <ResultsPage analysisResult={analysisResult} userGuesses={userGuesses} onRestart={handleRestart} />;
     default:
       return <LandingPage onStart={handleStart} />;
   }
