@@ -37,77 +37,66 @@ serve(async (req) => {
 
     const prompt = `You are conducting a personality assessment to match someone with a historical figure.
 
-Generate question ${questionNumber} of 5.
+Generate question ${questionNumber} of 5 as an open-ended, subjective question that encourages detailed personal reflection.
 
 CATEGORY FOR THIS QUESTION (use creative variety within the theme):
-${questionNumber === 1 ? `ETHICAL DILEMMAS & MORAL CHOICES - Create scenarios involving:
-• Leadership crises requiring difficult decisions
-• Resource allocation under scarcity
-• Competing loyalties or conflicting duties
-• Justice vs mercy situations
-• Individual rights vs collective good
-• Power and corruption temptations
-• Truth vs diplomacy dilemmas` : ''}${questionNumber === 2 ? `INNER DRIVES & LIFE PHILOSOPHY - Explore topics like:
-• What motivates them in challenging times
-• Their relationship with power, fame, or legacy
-• How they define success and fulfillment
-• Their approach to work-life balance
-• What they do when no one is watching
-• Their deepest fears or greatest aspirations
-• How they want to be remembered` : ''}${questionNumber === 3 ? `CORE VALUES & BELIEF SYSTEMS - Investigate areas such as:
-• Tradition vs innovation conflicts
-• Individual freedom vs social order
-• Idealism vs pragmatism in action
-• Faith/spirituality vs rational thinking
-• Loyalty vs honesty when they conflict
-• Equality vs merit-based systems
-• Risk vs security orientations` : ''}${questionNumber === 4 ? `ADVERSITY & RESILIENCE PATTERNS - Focus on scenarios like:
-• Major failures or public embarrassments
-• Betrayal by trusted allies or friends
-• Financial ruin or loss of status
-• Health crises or physical limitations
-• Unexpected opposition or criticism
-• Being misunderstood or isolated
-• Having to start over from scratch` : ''}${questionNumber === 5 ? `SOCIAL DYNAMICS & LEADERSHIP STYLE - Consider situations involving:
-• Building consensus among disagreeing parties
-• Dealing with incompetent but loyal followers
-• Managing talented but difficult personalities
-• Choosing between popular and right decisions
-• Handling competition and rivalry
-• Inspiring others during dark times
-• Balancing transparency with strategy` : ''}
+${questionNumber === 1 ? `ETHICAL DILEMMAS & MORAL CHOICES - Create reflective prompts about:
+• How they handle difficult moral decisions
+• Their approach to competing loyalties or duties
+• Personal experiences with justice vs mercy
+• Times they've faced ethical temptations
+• Balancing individual rights vs collective good
+• How they navigate truth vs diplomacy` : ''}${questionNumber === 2 ? `INNER DRIVES & LIFE PHILOSOPHY - Explore personal topics like:
+• What truly motivates them during challenges
+• Their relationship with power, recognition, or legacy
+• How they personally define success and fulfillment
+• Their approach to balance in life
+• Personal values when no one is watching
+• Their deepest fears or greatest aspirations` : ''}${questionNumber === 3 ? `CORE VALUES & BELIEF SYSTEMS - Investigate personal beliefs about:
+• Their stance on tradition vs innovation
+• Personal views on freedom vs order
+• How they balance idealism with pragmatism
+• Their spiritual or philosophical foundation
+• Personal conflicts between loyalty and honesty
+• Their views on fairness and merit` : ''}${questionNumber === 4 ? `ADVERSITY & RESILIENCE PATTERNS - Focus on personal experiences with:
+• How they've handled major failures or setbacks
+• Times they've faced betrayal or disappointment
+• Personal experiences with loss of status or resources
+• How they cope with criticism or opposition
+• Times they've felt misunderstood or isolated
+• Experiences starting over or rebuilding` : ''}${questionNumber === 5 ? `SOCIAL DYNAMICS & LEADERSHIP STYLE - Explore their approach to:
+• How they build consensus in difficult situations
+• Their style of managing difficult personalities
+• Times they've chosen principles over popularity
+• How they handle competition or rivalry
+• Their approach to inspiring others during hardship
+• Balancing openness with strategic thinking` : ''}
 
-CREATIVE GUIDELINES:
-- Vary the setting: historical, modern, hypothetical, personal, professional
-- Mix question formats: scenarios, preferences, reactions, choices
-- Include emotional and intellectual challenges
-- Range from intimate personal moments to grand public decisions
-- Draw inspiration from real historical situations but make them relatable
-- Ensure each option reflects distinctly different personality archetypes
+QUESTION GUIDELINES:
+- Create thoughtful, reflective prompts that encourage storytelling
+- Ask about personal experiences, beliefs, or approaches
+- Frame scenarios that allow for nuanced, detailed responses
+- Encourage examples from their own life or hypothetical situations
+- Make questions that reveal personality patterns and values
+- Use engaging, conversational language
+- Questions should be 20-40 words
 
-REVEAL DIFFERENT PATTERNS:
-- Intuitive vs analytical decision-making
-- Collaborative vs independent approaches  
-- Idealistic vs pragmatic worldviews
-- Immediate action vs strategic patience
-- Compassionate vs firm leadership styles
-- Innovation vs tradition preferences
-
-QUESTION MUST BE BETWEEN 20-30 WORDS.
+QUESTION FORMATS TO VARY:
+- "Describe a time when..."
+- "How do you typically handle..."
+- "What's your approach to..."
+- "Tell me about your experience with..."
+- "When faced with [scenario], how do you..."
+- "What drives you when..."
 
 Format as JSON:
 {
-  "title": "Scenario Type",
-  "question": "Brief scenario description",
-  "options": {
-    "A": "First approach option",
-    "B": "Second approach option", 
-    "C": "Third approach option"
-  },
-  "placeholder": "Select your instinct..."
+  "title": "Question Category",
+  "question": "Open-ended reflective question that encourages detailed personal response",
+  "placeholder": "Share your thoughts, experiences, and perspective..."
 }
 
-Create scenarios that differentiate between historical leadership styles and personality types.
+Create questions that differentiate between historical leadership styles and personality types through personal reflection.
 
 Only return the JSON, no other text.`;
 
