@@ -40,35 +40,28 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
     setIsLoading(true);
     setSelectedOption(null); // Reset selection for new question
     try {
-      const questionResponse = await generateNextQuestion(
+      const questionData = await generateNextQuestion(
         currentQuestionIndex + 1,
         responses.slice(0, currentQuestionIndex)
       );
       
-      // Try to parse as JSON first, fallback to string
-      let questionData;
-      try {
-        questionData = JSON.parse(questionResponse);
-      } catch {
-        questionData = {
-          question: questionResponse,
-          options: [],
-          placeholder: "Share your thoughts and experiences..."
-        };
-      }
+      console.log("Raw question data received:", questionData);
       
       // Store the question text
       const newQuestions = [...questions];
-      newQuestions[currentQuestionIndex] = questionData.question || questionResponse;
+      newQuestions[currentQuestionIndex] = questionData.question;
       setQuestions(newQuestions);
       
       setCurrentQ({
         id: currentQuestionIndex + 1,
         title: `Question ${currentQuestionIndex + 1}`,
-        question: questionData.question || questionResponse,
+        question: questionData.question,
         placeholder: questionData.placeholder || "Select an option below or write your own...",
         options: questionData.options || []
       });
+      
+      console.log("Set currentQ with options:", questionData.options);
+      console.log("Options length:", questionData.options?.length);
     } catch (error) {
       console.error("Error loading question:", error);
       const fallbackQuestion = "Tell me about yourself and what drives you.";
