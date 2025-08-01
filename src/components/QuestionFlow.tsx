@@ -161,17 +161,6 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
               </p>
             </div>
 
-            {/* Skip Button */}
-            <div className="flex justify-center mb-4">
-              <Button
-                onClick={handleSkip}
-                variant="ghost"
-                className="font-crimson text-muted-foreground hover:text-foreground"
-              >
-                No clue, skip
-              </Button>
-            </div>
-
             {/* Navigation */}
             <div className="flex items-center justify-between">
               <Button
@@ -183,15 +172,25 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
                 {currentQuestionIndex === 0 ? "Back to Start" : "Previous"}
               </Button>
 
-              <Button
-                onClick={handleNext}
-                variant="History"
-                disabled={!canProceed}
-                className="font-crimson"
-              >
-                {isLastQuestion ? "Complete Assessment" : "Next Question"}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <div className="flex items-center gap-3">
+                <Button
+                  onClick={handleSkip}
+                  variant="outline"
+                  className="font-crimson border-History-gold text-History-gold hover:bg-History-gold hover:text-foreground"
+                >
+                  No clue, skip
+                </Button>
+
+                <Button
+                  onClick={handleNext}
+                  variant="History"
+                  disabled={!canProceed}
+                  className="font-crimson"
+                >
+                  {isLastQuestion ? "Complete Assessment" : "Next Question"}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
