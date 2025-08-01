@@ -51,19 +51,28 @@ ${questionNumber === 8 ? 'RISK & CHANGE TOLERANCE - Innovation approach (revolut
 ${questionNumber === 9 ? 'HANDLING ADVERSITY - Response to setbacks (fight vs adapt, persist vs pivot, blame vs accountability, etc.)' : ''}
 
 REQUIREMENTS:
-- 15-25 words maximum
-- Provocative and direct, slightly open-ended
-- Present genuine tension between two valid approaches
+- 15-25 words maximum for the question
+- Present genuine tension between approaches
 - No obvious "right" answer
+- Provide 3 distinct response options (20-30 words each)
+- Each option represents a different philosophical approach
 - End with "Your move?" or "Your instinct?" or "Your take?"
 
-TONE: Make them choose a side and reveal their true nature.
+RESPONSE OPTIONS should be:
+- Complete, thoughtful statements (not just "Option A")
+- Representing different personality archetypes
+- Balanced in appeal - no obviously better choice
 
 Format as JSON:
 {
   "title": "Core Dimension",
   "question": "Direct provocative question",
-  "placeholder": "Your honest take..."
+  "options": [
+    "First philosophical approach with reasoning",
+    "Second distinct approach with different reasoning", 
+    "Third alternative perspective with unique reasoning"
+  ],
+  "placeholder": "Select an option above or write your own response..."
 }
 
 Only return the JSON, no other text.`;
