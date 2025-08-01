@@ -39,46 +39,46 @@ serve(async (req) => {
 ---
 ${context}
 ---
-CRITICAL: Analyze the questions and responses above and identify what topics, settings, and moral conflicts have already been used. Then deliberately create question ${questionNumber} of 7 that uses a COMPLETELY DIFFERENT scenario type.
+CRITICAL: Analyze the questions above and identify what topics, settings, and moral conflicts have already been used. Then deliberately create question ${questionNumber} of 7 that uses a COMPLETELY DIFFERENT scenario type.
 
-MANDATORY TOPIC ROTATION (use the one that matches your question number):
-Question 1: Loyalty to person vs loyalty to principle
-Question 2: Security/stability vs freedom/risk
-Question 3: Individual needs vs collective needs
-Question 4: Immediate benefit vs long-term consequences
-Question 5: Justice vs mercy
-Question 6: Truth vs harmony
-Question 7: Tradition vs progress
+LEADERSHIP DILEMMA TYPES (use one that matches your question number):
+Question 1: Pragmatic effectiveness vs moral purity  
+Question 2: Centralized control vs distributed power
+Question 3: Rapid transformation vs gradual stability
+Question 4: Popular approval vs unpopular necessity
+Question 5: Cultural preservation vs cultural integration  
+Question 6: Personal relationships vs institutional loyalty
+Question 7: Risk everything for greatness vs secure steady progress
 
 SCENARIO REQUIREMENTS:
-- Create a realistic situation with TWO EQUALLY VALID moral positions
-- Both choices must be genuinely defensible and reasonable
-- No "obviously right" vs "obviously selfish" options
-- Forces them to reveal which deeply-held value takes priority
-- Must use DIFFERENT setting, characters, and stakes than ALL previous questions
-- 25-35 words maximum
+- Present a leadership/influence decision that reveals governing philosophy
+- Both choices represent different but valid approaches to power and responsibility
+- Shows whether they prioritize results vs methods, control vs freedom, legacy vs immediate needs
+- Must reveal their instinct about human nature, change, and authority
+- Different setting/context than ALL previous questions
+- 30-40 words maximum
 
-REVELATION TARGETS:
-What's their instinctive hierarchy when two legitimate values conflict? Do they lean toward security or freedom? Individual or collective? Justice or compassion?
+DECISION ARCHETYPES TO REVEAL:
+- The unifier vs the conqueror mentality
+- The pragmatist vs the idealist approach  
+- The centralizer vs the liberator instinct
+- The reformer vs the traditionalist tendency
+- The diplomat vs the warrior response
 
-AVOID "MORAL TRAP" QUESTIONS:
-- No individual ambition vs team success (team success seems "right")
-- No personal gain vs helping others (helping seems "right") 
-- No breaking rules vs following them (following seems "right")
-- Create conflicts between two positive values, not good vs selfish
+AVOID OBVIOUS MORAL CHOICES:
+Create dilemmas between two legitimate leadership philosophies, not right vs wrong.
 
 EXPLICIT AVOIDANCE:
-Based on the context above, do NOT repeat any similar:
-- Settings, character types, or moral conflict structures
+Based on context, use completely different settings and character dynamics.
 
 Format as JSON:
 {
-  "title": "Core Conflict Type",
-  "question": "Balanced dilemma with two legitimate choices ending with 'What do you do?'",
+  "title": "Leadership Philosophy",
+  "question": "Power/influence dilemma ending with 'What's your approach?'",
   "placeholder": "I would..."
 }
 
-Generate something with no obvious "correct" answer.
+Create scenarios that would differentiate between great historical leadership styles.
 
 Only return the JSON, no other text.`;
 
