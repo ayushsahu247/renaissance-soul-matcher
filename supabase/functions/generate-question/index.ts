@@ -29,7 +29,7 @@ serve(async (req) => {
       throw new Error('GEMINI_API_KEY not configured');
     }
 
-    const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+    const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
 
     const context = previousResponses.length > 0 
       ? `Previous responses: ${previousResponses.join("; ")}`
@@ -37,43 +37,40 @@ serve(async (req) => {
 
     const prompt = `You are conducting a personality assessment to match someone with a historical figure.
 
-Generate question ${questionNumber} of 5.
+${context}
 
-MANDATORY CATEGORY ROTATION (use the category that matches your question number):
-Question 1: Hypothetical Scenarios & Ethical Dilemmas - Present a high-stakes situation with 3 distinct approaches
-Question 2: Inner Desires & Motivations - Reveal what they truly want from life or how they spend personal time
-Question 3: Personal Values & Beliefs - Uncover core principles when values conflict
-Question 4: Reactions to Adversity & Failure - Test resilience and how they handle setbacks
-Question 5: Relationships & Social Dynamics - Explore how they interact with others and build teams
+CRITICAL: Analyze previous questions and create question ${questionNumber} of 7 using a COMPLETELY DIFFERENT scenario.
 
-QUESTION STRUCTURE:
-- Present the scenario/situation in 15-25 words
-- Provide 3 distinct response options (A, B, C) 
-- Each option reveals different leadership archetypes
-- No obviously "right" or "wrong" answers
-- All options should be reasonable approaches
+REVEAL THEIR INSTINCTS ABOUT (pick one not used yet):
+- Effective shortcuts vs "the right way" 
+- Keeping traditions vs embracing change
+- Rewarding loyalty vs rewarding talent
+- Unity through shared culture vs celebrating differences
+- Personal principles vs getting things done
+- Gradual improvement vs bold transformation
+- Trusting people vs systems and rules
 
-REVEAL DIFFERENT PATTERNS:
-- Decision-making under pressure vs careful planning
-- Individual action vs collaborative approaches  
-- Pragmatic vs idealistic worldviews
-- Short-term crisis management vs long-term vision
-- Mercy vs justice orientations
-- Risk-taking vs cautious approaches
+MAKE IT CONVERSATIONAL:
+- Use everyday situations that reveal these deeper patterns
+- Sound like an interesting friend asking a thought-provoking question
+- Avoid heavy political/philosophical language
+- Make them curious about their own answer
+- 15-25 words maximum
+- End with "What's your move?" or "Your instinct?"
+
+AVOID:
+- Academic tone or serious policy language
+- Repeating any settings/scenarios from context above
+- Questions that sound like homework
 
 Format as JSON:
 {
-  "title": "Scenario Type",
-  "question": "Brief scenario description",
-  "options": {
-    "A": "First approach option",
-    "B": "Second approach option", 
-    "C": "Third approach option"
-  },
-  "placeholder": "Select your instinct..."
+  "title": "Simple Theme",
+  "question": "Light but revealing scenario that exposes deep patterns",
+  "placeholder": "I'd probably..."
 }
 
-Create scenarios that differentiate between historical leadership styles and personality types.
+Keep it fun and conversational while revealing the same leadership DNA.
 
 Only return the JSON, no other text.`;
 
@@ -119,7 +116,7 @@ Only return the JSON, no other text.`;
 
     const questionData = JSON.parse(jsonString);
 
-    return new Response(JSON.stringify(questionData), {
+    return new Response(JSON.stringify({ question: questionData.question }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
 

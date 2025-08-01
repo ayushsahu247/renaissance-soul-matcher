@@ -29,7 +29,7 @@ serve(async (req) => {
       throw new Error('GEMINI_API_KEY not configured');
     }
 
-    const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+    const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
 
     const prompt = `Based on these personality assessment responses, match this person to a historical figure and provide analysis.
 
@@ -37,11 +37,9 @@ Responses: ${responses.join("; ")}
 
 Match to a WIDELY RECOGNIZED historical figure that most educated people would know - someone taught in world history classes with widespread cultural recognition. Focus on "household names" of history across all cultures and time periods.
 
-EXAMPLES OF APPROPRIATE FIGURES: Napoleon Bonaparte, Cleopatra VII, Lorenzo de Medici, Cosimo de Medici, Leonardo da Vinci, Albert Einstein, Winston Churchill, Genghis Khan, Alexander the Great, Julius Caesar, Gandhi, Joan of Arc, Benjamin Franklin, Marie Curie, Theodore Roosevelt, Elizabeth I, Confucius, Hannibal, Catherine the Great, Abraham Lincoln, Mozart, Shakespeare, etc.
+EXAMPLES OF APPROPRIATE FIGURES: Napoleon Bonaparte, Cleopatra VII, Leonardo da Vinci, Albert Einstein, Winston Churchill, Genghis Khan, Alexander the Great, Julius Caesar, Gandhi, Joan of Arc, Benjamin Franklin, Marie Curie, Theodore Roosevelt, Elizabeth I, Confucius, Hannibal, Catherine the Great, Abraham Lincoln, Mozart, Shakespeare, etc.
 
 AVOID: Obscure regional figures, lesser-known nobles, niche personalities, random chieftains, or anyone people would need to Google to recognize.
-
-IMPORTANT: When analyzing responses, focus on the CONTENT and MEANING of the choices made, not the letter designations (A, B, C). Describe the specific decisions, approaches, and values demonstrated rather than referencing abstract letters.
 
 Analyze responses and match based on personality patterns, decision-making style, moral framework, leadership approach, and core motivations. Provide detailed analysis in JSON format:
 

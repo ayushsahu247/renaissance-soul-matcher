@@ -22,11 +22,10 @@ interface AnalysisResult {
 
 interface ResultsPageProps {
   analysisResult: AnalysisResult | null;
-  userGuesses?: string[];
   onRestart: () => void;
 }
 
-export const ResultsPage = ({ analysisResult, userGuesses = [], onRestart }: ResultsPageProps) => {
+export const ResultsPage = ({ analysisResult, onRestart }: ResultsPageProps) => {
   const { toast } = useToast();
   const [characterImage, setCharacterImage] = useState<WikipediaImageData | null>(null);
   const [imageLoading, setImageLoading] = useState(true);
@@ -146,22 +145,6 @@ Take the assessment yourself: ${window.location.origin}`;
     return paragraphs.filter(p => p.length > 0);
   };
 
-  // Check if user showed self-awareness with flexible name matching
-  const checkSelfAwareness = () => {
-    if (!userGuesses.length) return false;
-    
-    const normalizedResult = result.character.toLowerCase().replace(/[.,]/g, '');
-    return userGuesses.some(guess => {
-      const normalizedGuess = guess.toLowerCase().replace(/[.,]/g, '');
-      // Check for exact match or if one contains the other (for partial names)
-      return normalizedResult.includes(normalizedGuess) || 
-             normalizedGuess.includes(normalizedResult) ||
-             normalizedResult === normalizedGuess;
-    });
-  };
-
-  const isSelfAware = checkSelfAwareness();
-
   return (
     <div className="min-h-screen bg-gradient-elegant px-4 py-8">
       <div className="max-w-4xl mx-auto">
@@ -170,13 +153,6 @@ Take the assessment yourself: ${window.location.origin}`;
           <Badge variant="secondary" className="mb-4 font-playfair">
             Your Historical Match
           </Badge>
-          {isSelfAware && (
-            <div className="mb-4">
-              <Badge variant="outline" className="bg-History-gold/20 border-History-gold text-History-brown font-playfair">
-                ✨ Remarkable self-awareness
-              </Badge>
-            </div>
-          )}
           <h1 className="text-4xl md:text-5xl font-playfair font-bold text-foreground mb-2">
             {result.character}
           </h1>
@@ -196,25 +172,6 @@ Take the assessment yourself: ${window.location.origin}`;
             Personality Match
           </p>
         </div>
-
-        {/* Self-Awareness Comment */}
-        {isSelfAware && (
-          <Card className="shadow-History border-0 mb-8 bg-History-gold/5">
-            <CardContent className="p-6 text-center">
-              <div className="flex items-center justify-center mb-3">
-                <Crown className="h-5 w-5 text-History-gold mr-2" />
-                <h3 className="font-playfair font-semibold text-lg text-foreground">
-                  A Note on Your Intuition
-                </h3>
-              </div>
-              <p className="font-crimson text-foreground/80 leading-relaxed max-w-2xl mx-auto">
-                How remarkable that your initial intuition aligned with our assessment. This suggests a profound 
-                level of self-awareness—you possess the rare ability to recognize your own character with clarity 
-                and honesty. Such insight into one's nature is itself a mark of wisdom that {result.character} would have admired.
-              </p>
-            </CardContent>
-          </Card>
-        )}
 
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
           {/* Portrait & Basic Info */}
