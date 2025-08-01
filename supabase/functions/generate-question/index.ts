@@ -93,6 +93,8 @@ REVEAL DIFFERENT PATTERNS:
 - Compassionate vs firm leadership styles
 - Innovation vs tradition preferences
 
+QUESTION MUST NOT EXCEED 15-25 WORDS.
+
 Format as JSON:
 {
   "title": "Scenario Type",
