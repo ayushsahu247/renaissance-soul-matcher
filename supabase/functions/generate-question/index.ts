@@ -36,49 +36,42 @@ serve(async (req) => {
       : "This is the first question.";
 
     const prompt = `You are conducting a personality assessment to match someone with a historical figure.
----
+
 ${context}
----
+
 CRITICAL: Analyze the questions above and identify what topics, settings, and moral conflicts have already been used. Then deliberately create question ${questionNumber} of 7 that uses a COMPLETELY DIFFERENT scenario type.
 
-LEADERSHIP DILEMMA TYPES (use one that matches your question number):
-Question 1: Pragmatic effectiveness vs moral purity  
-Question 2: Centralized control vs distributed power
-Question 3: Rapid transformation vs gradual stability
-Question 4: Popular approval vs unpopular necessity
-Question 5: Cultural preservation vs cultural integration  
-Question 6: Personal relationships vs institutional loyalty
-Question 7: Risk everything for greatness vs secure steady progress
+LEADERSHIP PHILOSOPHY TYPES (use one that matches your question number):
+Question 1: Pragmatic power vs moral idealism (Machiavellian ethics)
+Question 2: Cultural unity vs cultural diversity (Role of tradition/identity)
+Question 3: Religious/moral authority vs secular effectiveness (Faith vs pragmatism)  
+Question 4: Meritocracy vs loyalty-based systems (Napoleonic organizational principles)
+Question 5: Rapid systematic change vs organic evolution (Revolutionary vs gradual)
+Question 6: Centralized vision vs decentralized autonomy (Control vs freedom)
+Question 7: Personal honor vs strategic necessity (Individual integrity vs collective benefit)
 
 SCENARIO REQUIREMENTS:
-- Present a leadership/influence decision that reveals governing philosophy
-- Both choices represent different but valid approaches to power and responsibility
-- Shows whether they prioritize results vs methods, control vs freedom, legacy vs immediate needs
-- Must reveal their instinct about human nature, change, and authority
+- Present situations involving cultural values, religious considerations, or strategic ethics
+- Reveal their instinct about: tradition vs progress, ends vs means, merit vs loyalty
+- Show whether they see culture/religion as tools for unity or sources of division
+- Test their comfort with morally ambiguous but effective strategies
 - Different setting/context than ALL previous questions
-- 30-40 words maximum
-
-DECISION ARCHETYPES TO REVEAL:
-- The unifier vs the conqueror mentality
-- The pragmatist vs the idealist approach  
-- The centralizer vs the liberator instinct
-- The reformer vs the traditionalist tendency
-- The diplomat vs the warrior response
+- 15-25 words maximum
 
 AVOID OBVIOUS MORAL CHOICES:
-Create dilemmas between two legitimate leadership philosophies, not right vs wrong.
+Create conflicts between legitimate philosophical approaches to power, culture, and ethics.
 
 EXPLICIT AVOIDANCE:
 Based on context, use completely different settings and character dynamics.
 
 Format as JSON:
 {
-  "title": "Leadership Philosophy",
-  "question": "Power/influence dilemma ending with 'What's your approach?'",
-  "placeholder": "I would..."
+  "title": "Core Philosophy",
+  "question": "Cultural/ethical/strategic dilemma ending with 'Your approach?'",
+  "placeholder": "I believe..."
 }
 
-Create scenarios that would differentiate between great historical leadership styles.
+Create scenarios that reveal deep philosophical differences about power, culture, and ethics.
 
 Only return the JSON, no other text.`;
 
