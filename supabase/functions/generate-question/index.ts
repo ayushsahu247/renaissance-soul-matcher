@@ -35,33 +35,48 @@ serve(async (req) => {
       ? `Previous responses: ${previousResponses.join("; ")}`
       : "This is the first question.";
 
-    const prompt = `Generate question ${questionNumber} of 7 for a personality assessment.
+    const prompt = `You are conducting a personality assessment to match someone with a historical figure.
 
 ${context}
 
-Create a simple, generic question that helps understand someone's personality and who they might relate to. 
+Generate question ${questionNumber} of 7. 
 
-Question types to use:
-- Who do you relate to and why?
-- What type of person inspires you?
-- Which historical figure would you want to have dinner with?
-- What kind of leader do you admire?
-- Who would you consider a role model?
-- What qualities do you most respect in others?
-- Which famous person shares your values?
+MANDATORY: Pick a random number between 1-8, then use the corresponding question type:
+1. Casual scenario: Real-life situation (work, social, family)
+2. Value ranking: Choose between 3-4 competing priorities 
+3. Personal preference: Lifestyle, habits, or ideals
+4. Social opinion: Gentle take on controversial topics
+5. Either/or choice: Two valid but opposing approaches
+6. Natural reaction: "When X happens, you usually..."
+7. Legacy question: Impact or remembrance preferences
+8. Change attitude: Traditional vs innovative approaches
 
-Keep the question:
-- Simple and direct
-- Under 20 words
-- Easy to understand
-- Focused on personal connection and relatability
+VARIETY REQUIREMENTS:
+- Question ${questionNumber} cannot repeat any format from previous questions
+- Must use different sentence structure than previous questions
+- Cannot start with "If you could..." or "What would you..."
+- Must be under 30 words
+- No explanations required - just natural response
+
+CONVERSATION STYLE:
+- Sound like a curious friend asking over coffee
+- Avoid academic or test-like language
+- Make it easy to answer naturally
+- Touch meaningful topics without being heavy
+
+SENSITIVE TOPICS (if chosen):
+Frame naturally: "Do you think..." "What's your take on..." "How do you feel about..."
+
+After generating the question, add "PROMPT WORKING" to the end.
 
 Format as JSON:
 {
-  "title": "Question ${questionNumber}",
-  "question": "Simple question about who they relate to or admire",
+  "title": "2-3 Word Title",
+  "question": "Conversational question + PROMPT WORKING", 
   "placeholder": "Start typing..."
 }
+
+CRITICAL: Be creative and random. Avoid any similarity to previous questions.
 
 Only return the JSON, no other text.`;
 
