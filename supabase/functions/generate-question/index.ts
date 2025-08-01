@@ -72,7 +72,7 @@ Append a "Prompt working" at the end of every question.
 Format as JSON:
 {
   "title": "2-3 Word Title", 
-  "question": "Natural, conversational question that reveals their character",
+  "question": "Natural, conversational question that reveals their character", + "PROMPT WORKING"
   "placeholder": "Start typing..."
 }
 
