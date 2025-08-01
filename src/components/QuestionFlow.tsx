@@ -47,15 +47,12 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
         responses.slice(0, currentQuestionIndex)
       );
       
-      // Parse the questionData if it's a string
-      const parsedData = typeof questionData === 'string' ? JSON.parse(questionData) : questionData;
-      
       setCurrentQ({
         id: currentQuestionIndex + 1,
-        title: parsedData.title || `Question ${currentQuestionIndex + 1}`,
-        question: parsedData.question,
-        options: parsedData.options || { A: "Option A", B: "Option B", C: "Option C" },
-        placeholder: parsedData.placeholder || "Select your instinct..."
+        title: questionData.title || `Question ${currentQuestionIndex + 1}`,
+        question: questionData.question,
+        options: questionData.options || { A: "Option A", B: "Option B", C: "Option C" },
+        placeholder: questionData.placeholder || "Select your instinct..."
       });
     } catch (error) {
       console.error("Error loading question:", error);
