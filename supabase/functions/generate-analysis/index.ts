@@ -41,6 +41,8 @@ EXAMPLES OF APPROPRIATE FIGURES: Napoleon Bonaparte, Cleopatra VII, Leonardo da 
 
 AVOID: Obscure regional figures, lesser-known nobles, niche personalities, random chieftains, or anyone people would need to Google to recognize.
 
+IMPORTANT: When analyzing responses, focus on the CONTENT and MEANING of the choices made, not the letter designations (A, B, C). Describe the specific decisions, approaches, and values demonstrated rather than referencing abstract letters.
+
 Analyze responses and match based on personality patterns, decision-making style, moral framework, leadership approach, and core motivations. Provide detailed analysis in JSON format:
 
 {
