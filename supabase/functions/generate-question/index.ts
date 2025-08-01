@@ -38,10 +38,12 @@ serve(async (req) => {
     const prompt = `You are conducting a personality assessment to match someone with a historical figure.
 
 Generate question ${questionNumber} of 5.
-
 QUESTION TYPE:
-${questionNumber === 1 ? 'ETHICAL DILEMMAS - Force a choice between competing values (justice vs mercy, loyalty vs truth, etc.)' : ''}${questionNumber === 2 ? 'INNER DRIVES - Reveal what motivates them (power, recognition, peace, legacy, etc.)' : ''}${questionNumber === 3 ? 'CORE VALUES - Test fundamental beliefs (tradition vs change, freedom vs order, etc.)' : ''}${questionNumber === 4 ? 'HANDLING ADVERSITY - Show how they deal with failure, betrayal, or setbacks' : ''}${questionNumber === 5 ? 'SOCIAL DYNAMICS - Reveal leadership style and how they handle people' : ''}
-
+${questionNumber === 1 ? 'LIFE PHILOSOPHY - Reveal worldview (beauty vs utility, knowledge vs action, etc.)' : ''}
+${questionNumber === 2 ? 'CREATIVE APPROACH - Show how they build/create (systematic vs inspired, solo vs collaborative, etc.)' : ''}  
+${questionNumber === 3 ? 'PERSONAL FULFILLMENT - What drives satisfaction (achievement vs harmony, recognition vs impact, etc.)' : ''}
+${questionNumber === 4 ? 'PROBLEM SOLVING - Approach to challenges (analytical vs intuitive, patient vs urgent, etc.)' : ''}
+${questionNumber === 5 ? 'HUMAN CONNECTION - How they relate to others (inspire vs serve, lead vs follow, etc.)' : ''}
 REQUIREMENTS:
 - 15-25 words length range
 - Provocative and direct, not open-ended
