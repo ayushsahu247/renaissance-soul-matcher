@@ -93,7 +93,7 @@ REVEAL DIFFERENT PATTERNS:
 - Compassionate vs firm leadership styles
 - Innovation vs tradition preferences
 
-QUESTION MUST NOT EXCEED 15-25 WORDS.
+QUESTION MUST BE BETWEEN 20-30 WORDS.
 
 Format as JSON:
 {
