@@ -36,42 +36,49 @@ serve(async (req) => {
       : "This is the first question.";
 
     const prompt = `You are conducting a personality assessment to match someone with a historical figure.
-
+---
 ${context}
+---
+CRITICAL: Analyze the questions and responses above and identify what topics, settings, and moral conflicts have already been used. Then deliberately create question ${questionNumber} of 7 that uses a COMPLETELY DIFFERENT scenario type.
 
-Analyze the previous questions to avoid repetition. Generate question ${questionNumber} of 7 that presents a MORAL DILEMMA or VALUE CONFLICT that forces them to reveal their true nature.
+MANDATORY TOPIC ROTATION (use the one that matches your question number):
+Question 1: Loyalty to person vs loyalty to principle
+Question 2: Security/stability vs freedom/risk
+Question 3: Individual needs vs collective needs
+Question 4: Immediate benefit vs long-term consequences
+Question 5: Justice vs mercy
+Question 6: Truth vs harmony
+Question 7: Tradition vs progress
 
-CREATE A DILEMMA THAT EXPOSES:
-- Core values when they conflict with each other
-- How they handle competing loyalties  
-- Their instinctive moral compass under pressure
-- What they're willing to sacrifice for what they believe in
-- Their biases about power, fairness, loyalty, truth
-- Whether they prioritize individuals vs groups
-- How they balance pragmatism vs principles
+SCENARIO REQUIREMENTS:
+- Create a realistic situation with TWO EQUALLY VALID moral positions
+- Both choices must be genuinely defensible and reasonable
+- No "obviously right" vs "obviously selfish" options
+- Forces them to reveal which deeply-held value takes priority
+- Must use DIFFERENT setting, characters, and stakes than ALL previous questions
+- 25-35 words maximum
 
-DILEMMA TYPES (pick one that hasn't been used):
-- Loyalty vs justice: Choose between protecting someone you care about vs doing what's right
-- Security vs freedom: Safety for many vs liberty for individuals  
-- Truth vs harmony: Speaking up vs keeping peace
-- Personal gain vs greater good: Success for you vs benefit for others
-- Tradition vs progress: Preserving what works vs embracing change
-- Mercy vs justice: Forgiveness vs consequences
-- Individual vs collective: Personal rights vs community needs
+REVELATION TARGETS:
+What's their instinctive hierarchy when two legitimate values conflict? Do they lean toward security or freedom? Individual or collective? Justice or compassion?
 
-FORMAT: Present a realistic scenario where they must choose between two compelling but conflicting values. Make it:
-- Specific and relatable (not abstract)
-- No clear "right" answer
-- Forces them to prioritize what matters most
-- Under 30 words
-- Ends with "What do you do?" or "What's your instinct?"
+AVOID "MORAL TRAP" QUESTIONS:
+- No individual ambition vs team success (team success seems "right")
+- No personal gain vs helping others (helping seems "right") 
+- No breaking rules vs following them (following seems "right")
+- Create conflicts between two positive values, not good vs selfish
+
+EXPLICIT AVOIDANCE:
+Based on the context above, do NOT repeat any similar:
+- Settings, character types, or moral conflict structures
 
 Format as JSON:
 {
-  "title": "2-3 Word Dilemma Type",
-  "question": "Realistic moral dilemma that forces a revealing choice",
+  "title": "Core Conflict Type",
+  "question": "Balanced dilemma with two legitimate choices ending with 'What do you do?'",
   "placeholder": "I would..."
 }
+
+Generate something with no obvious "correct" answer.
 
 Only return the JSON, no other text.`;
 
