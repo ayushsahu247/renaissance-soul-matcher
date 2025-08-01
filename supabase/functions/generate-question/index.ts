@@ -57,12 +57,18 @@ QUESTION TYPES (choose something NOT used yet):
 - Views on tradition vs change
 - What energizes or drains you
 
-Keep it conversational, under 25 words, and easy to answer naturally.
+TONE: Make it slightly provocative but chill - like a friend challenging you to think, not just asking for information. Use phrases that nudge them toward a stance:
+- "Do you think..." 
+- "What's your honest take on..."
+- "Which bugs you more..."
+- "Are you the type who..."
+
+Keep it conversational, under 25 words. Make them want to defend or explain their position.
 
 Format as JSON:
 {
   "title": "2-3 Word Title",
-  "question": "Diverse question + PROMPT WORKING",
+  "question": "Slightly provocative but friendly question",
   "placeholder": "Start typing..."
 }
 
