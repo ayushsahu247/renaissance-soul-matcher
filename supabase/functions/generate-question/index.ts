@@ -37,60 +37,26 @@ serve(async (req) => {
 
     const prompt = `You are conducting a personality assessment to match someone with a historical figure.
 
-Generate question ${questionNumber} of 5 as a focused, provocative question that reveals core beliefs and instincts.
+Generate question ${questionNumber} of 5.
 
-CATEGORY FOR THIS QUESTION:
-${questionNumber === 1 ? `ETHICAL DILEMMAS & MORAL CHOICES - Create pointed questions about moral instincts:
-- Tough choices between competing loyalties
-- When ends justify means vs when they don't
-- Justice vs mercy in real situations
-- Truth vs diplomacy trade-offs
-- Individual rights vs collective good tensions` : ''}${questionNumber === 2 ? `INNER DRIVES & LIFE PHILOSOPHY - Probe what really motivates them:
-- What they're willing to sacrifice for success
-- How they handle power and recognition
-- What drives them when things get tough
-- Their honest relationship with ambition
-- What they fear most about failure` : ''}${questionNumber === 3 ? `CORE VALUES & BELIEF SYSTEMS - Challenge their fundamental beliefs:
-- Tradition vs innovation tensions
-- Freedom vs order trade-offs
-- Idealism vs pragmatism conflicts
-- Merit vs loyalty decisions
-- Fairness vs effectiveness choices` : ''}${questionNumber === 4 ? `ADVERSITY & RESILIENCE PATTERNS - Test their response to setbacks:
-- How they handle betrayal or disappointment
-- Their instinct when facing major failure
-- Response to criticism and opposition
-- What they do when isolated or misunderstood
-- How they rebuild after losing everything` : ''}${questionNumber === 5 ? `SOCIAL DYNAMICS & LEADERSHIP STYLE - Reveal their social instincts:
-- How they handle difficult personalities
-- When they choose principles over popularity
-- Their approach to competition and rivalry
-- How they inspire others during crisis
-- Balance between openness and strategy` : ''}
+QUESTION TYPE:
+${questionNumber === 1 ? 'ETHICAL DILEMMAS - Force a choice between competing values (justice vs mercy, loyalty vs truth, etc.)' : ''}${questionNumber === 2 ? 'INNER DRIVES - Reveal what motivates them (power, recognition, peace, legacy, etc.)' : ''}${questionNumber === 3 ? 'CORE VALUES - Test fundamental beliefs (tradition vs change, freedom vs order, etc.)' : ''}${questionNumber === 4 ? 'HANDLING ADVERSITY - Show how they deal with failure, betrayal, or setbacks' : ''}${questionNumber === 5 ? 'SOCIAL DYNAMICS - Reveal leadership style and how they handle people' : ''}
 
-QUESTION STYLE:
-- Make them take a stance or reveal their instincts
-- Present scenarios with tension or conflict
-- Ask "What's your honest take on..." or "How do you really handle..."
-- Force them to choose between two valid but competing approaches
-- Make it slightly uncomfortable - probe their real beliefs
-- 15-30 words maximum
-- End with "Your move?" or "What's your instinct?" or "Your honest take?"
+REQUIREMENTS:
+- 15-25 words maximum
+- Provocative and direct, not open-ended
+- Present genuine tension between two valid approaches
+- No obvious "right" answer
+- End with "Your move?" or "Your instinct?" or "Your take?"
 
-PROVOCATIVE FORMATS:
-- "What's your real opinion on..."
-- "When push comes to shove, do you..."
-- "Be honest - how do you actually handle..."
-- "What's your gut reaction when..."
-- "Which bothers you more..."
+TONE: Make them choose a side and reveal their true nature.
 
 Format as JSON:
 {
-  "title": "Core Theme",
-  "question": "Provocative question that forces them to reveal their true nature",
-  "placeholder": "Your honest response..."
+  "title": "Theme",
+  "question": "Direct provocative question",
+  "placeholder": "Your honest take..."
 }
-
-Make them think "Damn, that's a good question" and reveal something real about themselves.
 
 Only return the JSON, no other text.`;
 
