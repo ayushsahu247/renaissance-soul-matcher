@@ -37,7 +37,10 @@ serve(async (req) => {
 
     const prompt = `You are conducting a personality assessment to match someone with a historical figure.
 
+    These are the previous questions and responses - 
+    ---
 ${context}
+---
 
 CRITICAL: Analyze previous questions and create question ${questionNumber} of 7 using a COMPLETELY DIFFERENT scenario.
 
