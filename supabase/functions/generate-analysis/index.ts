@@ -45,7 +45,7 @@ Analyze responses and match based on personality patterns, decision-making style
 
 {
   "character": "Historical Figure Name",
-  "matchPercentage": 85-95,
+  "matchPercentage": 70-95,
   "description": "2-3 sentence description of why they match this figure",
   "shortDescription": "3-7 word concise description of the character's role/identity",
   "biography": "3-4 paragraph biography about this historical figure, focusing on their character, leadership style, and what made them unique",
