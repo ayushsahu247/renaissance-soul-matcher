@@ -72,7 +72,7 @@ After generating the question, add "PROMPT WORKING" to the end.
 Format as JSON:
 {
   "title": "2-3 Word Title",
-  "question": "Conversational question + PROMPT WORKING", 
+  "question": "Conversational question", 
   "placeholder": "Start typing..."
 }
 
