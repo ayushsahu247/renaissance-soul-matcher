@@ -3,6 +3,7 @@ import { LandingPage } from "@/components/LandingPage";
 import { QuestionFlow } from "@/components/QuestionFlow";
 import { AnalysisScreen } from "@/components/AnalysisScreen";
 import { ResultsPage } from "@/components/ResultsPage";
+import { saveAssessment } from "@/services/assessmentService";
 
 type AppState = "landing" | "questions" | "analysis" | "results";
 
@@ -21,6 +22,7 @@ interface AnalysisResult {
 
 const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>("landing");
+  const [questions, setQuestions] = useState<string[]>([]);
   const [responses, setResponses] = useState<string[]>([]);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
 
@@ -28,18 +30,32 @@ const Index = () => {
     setCurrentState("questions");
   };
 
-  const handleQuestionsComplete = (userResponses: string[]) => {
+  const handleQuestionsComplete = (userQuestions: string[], userResponses: string[]) => {
+    setQuestions(userQuestions);
     setResponses(userResponses);
     setCurrentState("analysis");
   };
 
-  const handleAnalysisComplete = (result: AnalysisResult) => {
+  const handleAnalysisComplete = async (result: AnalysisResult) => {
     setAnalysisResult(result);
+    
+    // Save the complete assessment to the database
+    try {
+      await saveAssessment({
+        questions,
+        responses,
+        result
+      });
+    } catch (error) {
+      console.error('Failed to save assessment:', error);
+    }
+    
     setCurrentState("results");
   };
 
   const handleRestart = () => {
     setCurrentState("landing");
+    setQuestions([]);
     setResponses([]);
     setAnalysisResult(null);
   };

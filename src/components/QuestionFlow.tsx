@@ -14,12 +14,13 @@ interface Question {
 }
 
 interface QuestionFlowProps {
-  onComplete: (responses: string[]) => void;
+  onComplete: (questions: string[], responses: string[]) => void;
   onBack: () => void;
 }
 
 export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [questions, setQuestions] = useState<string[]>([]);
   const [responses, setResponses] = useState<string[]>([]);
   const [currentQ, setCurrentQ] = useState<Question | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,6 +42,11 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
         responses.slice(0, currentQuestionIndex)
       );
       
+      // Store the question text
+      const newQuestions = [...questions];
+      newQuestions[currentQuestionIndex] = questionText;
+      setQuestions(newQuestions);
+      
       setCurrentQ({
         id: currentQuestionIndex + 1,
         title: `Question ${currentQuestionIndex + 1}`,
@@ -49,10 +55,17 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
       });
     } catch (error) {
       console.error("Error loading question:", error);
+      const fallbackQuestion = "Tell me about yourself and what drives you.";
+      
+      // Store the fallback question
+      const newQuestions = [...questions];
+      newQuestions[currentQuestionIndex] = fallbackQuestion;
+      setQuestions(newQuestions);
+      
       setCurrentQ({
         id: currentQuestionIndex + 1,
         title: `Question ${currentQuestionIndex + 1}`,
-        question: "Tell me about yourself and what drives you.",
+        question: fallbackQuestion,
         placeholder: "Share your thoughts and experiences..."
       });
     } finally {
@@ -70,7 +83,9 @@ export const QuestionFlow = ({ onComplete, onBack }: QuestionFlowProps) => {
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      onComplete(responses.filter(response => response.trim() !== ""));
+      const filteredResponses = responses.filter(response => response.trim() !== "");
+      const correspondingQuestions = questions.slice(0, filteredResponses.length);
+      onComplete(correspondingQuestions, filteredResponses);
     }
   };
 
